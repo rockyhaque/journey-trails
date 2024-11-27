@@ -36,10 +36,10 @@ const FeaturedPlace = () => {
   
   const loadData = async() => {
     const {data} = await axios.get(`http://localhost:3000/api/all-places`)
-    setPlaces(data)
+    setPlaces(data.places)
     setLoading(false)
   }
-  console.log(places);
+
 
   useEffect(()=> {
     loadData();
