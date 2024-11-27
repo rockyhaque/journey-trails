@@ -12,7 +12,7 @@ const SectionHeading = ({ title, description }) => {
   return (
     <div className="text-center py-12">
       <h1 className={`${montserrat.className} text-2xl`}>{title}</h1>
-      <p className="text-xs">{description}</p>
+      <p className="text-md w-1/2 mx-auto mt-2">{description}</p>
     </div>
   );
 };

@@ -2,7 +2,7 @@
   {
     "id": "01",
     "title": "Sunny Beach Paradise",
-    " shortDescription": "Relax on golden sands and enjoy the calming ocean breeze at Sunny Beach Paradise.",
+    "shortDescription": "Relax on golden sands and enjoy the calming ocean breeze at Sunny Beach Paradise.",
     "description": "Sunny Beach Paradise is the ultimate getaway for those seeking tranquility and breathtaking natural beauty. Located in the heart of the Maldives, this destination offers pristine golden sands, crystal-clear turquoise waters, and lush palm-fringed shorelines. Guests can indulge in activities such as snorkeling, sunset cruises, or simply unwinding on the beach. It’s the perfect escape from the hustle of daily life.",
     "coverImg": "https://i.ibb.co.com/56dDNys/wallace-fonseca-v-Te2-E3es6-WI-unsplash.jpg",
     "location": "Maldives",
@@ -15,7 +15,7 @@
   {
     "id": "02",
     "title": "Mountain Escape",
-    " shortDescription": "Experience serenity and breathtaking views at this remote mountain retreat.",
+    "shortDescription": "Experience serenity and breathtaking views at this remote mountain retreat.",
     "description": "Majestic Mountain Retreat offers an unforgettable experience nestled in the Alps. Wake up to stunning views of snow-capped peaks, enjoy hiking trails, and relax by the cozy fireplace in luxurious cabins. This retreat combines outdoor adventure with serene relaxation, making it ideal for nature enthusiasts and those seeking peace.",
     "coverImg": "https://i.ibb.co.com/TPVcdvs/kal-visuals-bzfxu1s-Il-Pc-unsplash.jpg",
     "location": "Swiss Alps",
@@ -28,7 +28,7 @@
   {
     "id": "03",
     "title": "Urban Explorer's Delight",
-    " shortDescription": "Discover vibrant city life, cultural hotspots, and fine dining experiences.",
+    "shortDescription": "Discover vibrant city life, cultural hotspots, and fine dining experiences.",
     "description": "Cultural Wonders of Kyoto takes you on a journey through Japan’s rich heritage. Explore ancient temples, tranquil gardens, and bustling markets filled with traditional crafts. Enjoy authentic Japanese cuisine while immersing yourself in the history and traditions of one of Japan’s most beautiful cities.",
     "coverImg": "https://i.ibb.co.com/DpfRby3/mark-pisek-j-GBa-N-x-Q5s-U-unsplash.jpg",
     "location": "New York City, USA",
@@ -41,7 +41,7 @@
   {
     "id": "04",
     "title": "Desert Adventure",
-    " shortDescription": "Explore vast sand dunes and unique desert wildlife with guided tours.",
+    "shortDescription": "Explore vast sand dunes and unique desert wildlife with guided tours.",
     "description": "Safari Adventure in Kenya is perfect for wildlife lovers. Embark on thrilling safaris through the savannah, where you can witness the Big Five in their natural habitat. Stay in eco-friendly lodges and enjoy guided tours that provide insight into Kenya’s incredible biodiversity and culture.",
     "coverImg": "https://i.ibb.co.com/19zn7T0/gilberto-olimpio-VCVNddng5vo-unsplash.jpg",
     "location": "Dubai, UAE",
@@ -54,7 +54,7 @@
   {
     "id": "05",
     "title": "Tropical Rainforest Retreat",
-    " shortDescription": "Immerse yourself in lush greenery and diverse wildlife in the tropical rainforest.",
+    "shortDescription": "Immerse yourself in lush greenery and diverse wildlife in the tropical rainforest.",
     "description": "Tropical Bliss in Bali offers an unforgettable island experience. Relax in luxurious villas, explore vibrant coral reefs, and discover cultural landmarks like Uluwatu Temple. Known for its welcoming locals and serene atmosphere, Bali is a paradise for those seeking relaxation and adventure.",
     "coverImg": "https://i.ibb.co.com/DkJrNNc/renaldo-matamoro-G1jy7b-VIme-U-unsplash.jpg",
     "location": "Amazon Rainforest, Brazil",
@@ -67,7 +67,7 @@
   {
     "id": "06",
     "title": "Island Getaway",
-    " shortDescription": "Enjoy crystal-clear waters and white sandy beaches on a private island.",
+    "shortDescription": "Enjoy crystal-clear waters and white sandy beaches on a private island.",
     "description": "Icelandic Expedition invites you to explore the land of fire and ice. Witness majestic waterfalls, geysers, and the Northern Lights. This adventure-packed trip offers glacier hikes, natural hot springs, and stunning landscapes, perfect for photographers and thrill-seekers alike.",
     "coverImg": "https://i.ibb.co.com/zJb57rj/gilberto-olimpio-VCVNddng5vo-unsplash.jpg",
     "location": "Bora Bora, French Polynesia",
@@ -80,7 +80,7 @@
   {
     "id": "07",
     "title": "Cultural Heritage Tour",
-    " shortDescription": "Step back in time and explore the rich cultural history of this ancient city.",
+    "shortDescription": "Step back in time and explore the rich cultural history of this ancient city.",
     "description": "Mediterranean Charm in Santorini takes you to a world of whitewashed villages and blue-domed churches. Enjoy stunning sunsets, crystal-clear waters, and fine Mediterranean cuisine. This Greek island is a romantic destination ideal for couples and travelers seeking beauty and relaxation.",
     "coverImg": "https://i.ibb.co.com/d7DjpfT/pexels-umaraffan499-394355.jpg",
     "location": "Kyoto, Japan",
@@ -93,7 +93,7 @@
   {
     "id": "08",
     "title": "Safari Expedition",
-    " shortDescription": "Go on an exciting safari to see majestic wildlife in their natural habitat.",
+    "shortDescription": "Go on an exciting safari to see majestic wildlife in their natural habitat.",
     "description": "Amazon Rainforest Discovery offers an immersive experience in one of the world’s most biodiverse regions. Travel by boat, explore lush jungles, and spot unique wildlife like toucans and jaguars. Learn about the Amazon's ecosystem and its importance to the planet.",
     "coverImg": "https://i.ibb.co.com/ZHTRhrL/pexels-francesco-ungaro-1233286.jpg",
     "location": "Serengeti, Tanzania",
@@ -106,7 +106,7 @@
   {
     "id": "09",
     "title": "Winter Wonderland",
-    " shortDescription": "Embrace snowy landscapes and thrilling winter sports activities.",
+    "shortDescription": "Embrace snowy landscapes and thrilling winter sports activities.",
     "description": "Desert Escape in Morocco combines luxury and adventure. Ride camels across golden dunes, camp under star-filled skies, and experience traditional Moroccan hospitality. Visit ancient kasbahs and vibrant markets filled with spices, crafts, and culture.",
     "coverImg": "https://i.ibb.co.com/PQ5bWhz/pexels-8moments-688660.jpg",
     "location": "Lapland, Finland",
@@ -119,7 +119,7 @@
   {
     "id": "10",
     "title": "Countryside Escape",
-    " shortDescription": "Unwind in peaceful countryside surroundings, ideal for relaxation and nature lovers.",
+    "shortDescription": "Unwind in peaceful countryside surroundings, ideal for relaxation and nature lovers.",
     "description": "Romantic Paris Experience offers a magical journey through the City of Lights. Explore iconic landmarks like the Eiffel Tower and Louvre Museum, stroll along the Seine River, and savor world-class French cuisine. Paris is the perfect destination for couples and art lovers.",
     "coverImg": "https://i.ibb.co.com/2F3sRHk/pexels-quang-nguyen-vinh-222549-2165688.jpg",
     "location": "Tuscany, Italy",
