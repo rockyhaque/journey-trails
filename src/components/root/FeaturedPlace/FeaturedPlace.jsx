@@ -5,45 +5,21 @@ import React, { useEffect, useState } from "react";
 import FeaturedPlaceCards from "../Cards/FeaturedPlaceCards";
 import axios, { get } from "axios";
 
-export const getStaticProps = async () => {
-  try {
-    const res = await fetch(`./data/places.json`);
-    const places = await res.json();
-
-    console.log(places)
-
-    return {
-      props: {
-        places,
-      },
-    };
-  } catch (error) {
-    console.error("Failed to fetch places:", error);
-    return {
-      props: {
-        places: [],
-      },
-    };
-  }
-};
-
-
-
 const FeaturedPlace = () => {
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  
-  const loadData = async() => {
-    const {data} = await axios.get(`http://localhost:3000/api/all-places`)
-    setPlaces(data)
+
+  const loadData = async () => {
+    const { data } = await axios.get(`http://localhost:3000/api/all-places`)
+    setPlaces(data.places)
     setLoading(false)
   }
-  console.log(places);
 
-  useEffect(()=> {
+
+  useEffect(() => {
     loadData();
-  },[])
+  }, [])
 
 
   return (
