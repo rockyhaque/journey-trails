@@ -5,7 +5,7 @@ import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import Image from "next/image";
-import BG from "../../../../public/assets/images/testimonialBG.png";
+import backgroundImage from "../../../../public/assets/images/testimonialBG.png";
 import React from "react";
 
 const testimonials = [
@@ -38,7 +38,7 @@ const Testimonial = () => {
     <div
       className="bg-center bg-cover"
       style={{
-        backgroundImage: `url(${BG.src})`,
+        backgroundImage: `url(${backgroundImage.src})`,
       }}
     >
       <div className="max-w-screen-xl mx-auto relative py-10">
