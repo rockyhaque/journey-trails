@@ -1,8 +1,9 @@
 "use client"
 
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import FeaturedPlaceCards from "../Cards/FeaturedPlaceCards";
+import axios, { get } from "axios";
 
 export const getStaticProps = async () => {
   try {
@@ -26,8 +27,24 @@ export const getStaticProps = async () => {
   }
 };
 
-const FeaturedPlace = ({ places = [] }) => {
+
+
+const FeaturedPlace = () => {
+  const [places, setPlaces] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   
+  const loadData = async() => {
+    const {data} = await axios.get(`http://localhost:3000/api/all-places`)
+    setPlaces(data)
+    setLoading(false)
+  }
+  console.log(places);
+
+  useEffect(()=> {
+    loadData();
+  },[])
+
 
   return (
     <div className="max-w-screen-xl mx-auto py-12">
@@ -38,7 +55,7 @@ const FeaturedPlace = ({ places = [] }) => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {places?.length > 0 ? (
           places.map((place) => (
-            <FeaturedPlaceCards key={place.id} travelInfo={place} />
+            <FeaturedPlaceCards key={place._id} travelInfo={place} />
           ))
         ) : (
           <p>No places available.</p>
