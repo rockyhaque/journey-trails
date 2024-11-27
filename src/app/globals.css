@@ -6,7 +6,7 @@
     @apply bg-white dark:bg-base-100 text-slate-500 dark:text-slate-700 shadow-xl border;
     position: relative;
     margin: 0 auto;
-    /* padding: 2em; */
+    /* padding: 3em; */
     border-radius: 10px;
   
     text-align: center;
