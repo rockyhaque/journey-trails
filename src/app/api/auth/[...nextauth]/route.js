@@ -41,10 +41,13 @@ const handler = NextAuth({
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      redirectUri: "https://journey-trails.vercel.app/api/auth/callback/google",
     }),
     GitHubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+      redirectUri:
+        "https://journey-trails.vercel.app/api/auth/callback/github,",
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_APPID,

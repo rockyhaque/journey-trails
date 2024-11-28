@@ -10,9 +10,7 @@ const FeaturedPlace = () => {
   const [loading, setLoading] = useState(false);
 
   const loadData = async () => {
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_URL}/api/all-places`
-    );
+    const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/all-places`);
     setPlaces(data.places);
     setLoading(false);
   };
