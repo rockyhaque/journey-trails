@@ -7,6 +7,8 @@ import logo from "../../../../public/assets/logo/logo.png";
 import { LuHome } from "react-icons/lu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { TbListDetails } from "react-icons/tb";
+import { RiServiceLine } from "react-icons/ri";
 const MobileSideBar = () => {
   const currentPath = usePathname();
   const [click, setClick] = useState(false);
@@ -79,13 +81,29 @@ const MobileSideBar = () => {
               <h3>Main Links </h3>
             </div>
             <Link
-              className={`${
-                currentPath === "/" && "text-xl px-2  "
-              } flex items-center gap-1 `}
-              href="/"
-            >
-              <LuHome size={20} /> Home
-            </Link>
+          className={`${
+            currentPath === "/" && "g-card px-2 py-1 font-semibold"
+          } flex items-center gap-1`}
+          href="/"
+        >
+          <LuHome size={20} /> Home
+        </Link>
+        <Link
+          className={`${
+            currentPath === "/about" && "g-card px-2 py-1 font-semibold"
+          } flex items-center gap-1`}
+          href="/about"
+        >
+          <TbListDetails  size={20} /> About
+        </Link>
+        <Link
+          className={`${
+            currentPath === "/contact" && "g-card px-2 py-1 font-semibold"
+          } flex items-center gap-1`}
+          href="/contact"
+        >
+          <RiServiceLine  size={20} /> Contact
+        </Link>
           </ul>
         </div>
 

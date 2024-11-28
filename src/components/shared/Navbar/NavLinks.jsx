@@ -4,6 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
 import { LuHome } from "react-icons/lu";
+import { RiServiceLine } from "react-icons/ri";
+import { TbListDetails } from "react-icons/tb";
 import { signOut, useSession } from "next-auth/react";
 
 const NavLinks = () => {
@@ -26,7 +28,7 @@ const NavLinks = () => {
           } flex items-center gap-1`}
           href="/about"
         >
-          <LuHome size={20} /> About
+          <TbListDetails  size={20} /> About
         </Link>
         <Link
           className={`${
@@ -34,7 +36,7 @@ const NavLinks = () => {
           } flex items-center gap-1`}
           href="/contact"
         >
-          <LuHome size={20} /> Contact
+          <RiServiceLine  size={20} /> Contact
         </Link>
       </div>
       {/*//* Login &Signup button added here */}
