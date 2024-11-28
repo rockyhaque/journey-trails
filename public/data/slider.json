@@ -1,0 +1,20 @@
+[
+  {
+    "image": "https://images.pexels.com/photos/8968895/pexels-photo-8968895.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "title": "Explore the Majestic Mountains of Serenity",
+    "description": "Experience breathtaking views, fresh mountain air, and an adventurous escape to nature's finest landscapes, perfect for your next unforgettable journey.",
+    "location": "Serenity Peaks, Colorado"
+  },
+  {
+    "image": "https://images.pexels.com/photos/20117735/pexels-photo-20117735/free-photo-of-man-hiking-in-desert.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "title": "Discover Hidden Beaches with Crystal Clear Waters",
+    "description": "Relax on pristine shores, immerse yourself in tropical bliss, and enjoy unforgettable sunsets that define the ultimate coastal getaway experience.",
+    "location": "Azure Bay, Maldives"
+  },
+  {
+    "image": "https://images.pexels.com/photos/9159958/pexels-photo-9159958.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    "title": "Wander Through Enchanting Forest Trails of Wonder",
+    "description": "Journey into lush greenery, where tranquil paths lead to magical moments, connecting you deeply with the beauty of untouched natural habitats.",
+    "location": "Emerald Woods, Oregon"
+  }
+]
