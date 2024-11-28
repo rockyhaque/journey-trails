@@ -10,7 +10,7 @@ const page = () => {
       image: e.target.photo.value,
       password: e.target.password.value,
     };
-    const res = await fetch(`${process.env.meta.LIVE_URL}/signup/api`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signup/api`, {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
