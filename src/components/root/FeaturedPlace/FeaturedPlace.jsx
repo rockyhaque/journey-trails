@@ -1,26 +1,23 @@
-"use client"
+"use client";
 
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import React, { useEffect, useState } from "react";
 import FeaturedPlaceCards from "../Cards/FeaturedPlaceCards";
-import axios, { get } from "axios";
+import axios from "axios";
 
 const FeaturedPlace = () => {
   const [places, setPlaces] = useState([]);
   const [loading, setLoading] = useState(false);
 
-
   const loadData = async () => {
-    const { data } = await axios.get(`http://localhost:3000/api/all-places`)
-    setPlaces(data.places)
-    setLoading(false)
-  }
-
+    const { data } = await axios.get(`http://localhost:3000/api/all-places`);
+    setPlaces(data.places);
+    setLoading(false);
+  };
 
   useEffect(() => {
     loadData();
-  }, [])
-
+  }, []);
 
   return (
     <div className="max-w-screen-xl mx-auto py-12">

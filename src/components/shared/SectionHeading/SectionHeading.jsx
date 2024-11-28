@@ -1,10 +1,8 @@
-// "use client"
-
 import React from "react";
 import { Montserrat } from "next/font/google";
 
 const montserrat = Montserrat({
-  weight: ["400","900"],
+  weight: ["400", "900"],
   subsets: ["latin"],
 });
 
@@ -18,4 +16,3 @@ const SectionHeading = ({ title, description }) => {
 };
 
 export default SectionHeading;
-
