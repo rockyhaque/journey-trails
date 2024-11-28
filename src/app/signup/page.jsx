@@ -1,7 +1,15 @@
 "use client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
+import Swal from "sweetalert2";
 
-const page = () => {
+const Page = () => {
+  const router = useRouter();
+  const { data: session } = useSession();
+  if (session) {
+    router.push("/");
+  }
   const handleSignUp = async (e) => {
     e.preventDefault();
     const newUser = {
@@ -10,7 +18,7 @@ const page = () => {
       image: e.target.photo.value,
       password: e.target.password.value,
     };
-    const res = await fetch(`${process.env.meta.LIVE_URL}/signup/api`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signup/api`, {
       method: "POST",
       body: JSON.stringify(newUser),
       headers: {
@@ -19,6 +27,22 @@ const page = () => {
     });
     if (res.status === 200) {
       e.target.reset();
+      Swal.fire({
+        icon: "success",
+        title: "Account Created Successfully!",
+        text: "You can now log in to your account.",
+        timer: 2000,
+        willClose: () => {
+          router.push("/");
+        },
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Sign Up Failed!",
+        text: "Please try again later.",
+        timer: 3000,
+      });
     }
   };
 
@@ -117,4 +141,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

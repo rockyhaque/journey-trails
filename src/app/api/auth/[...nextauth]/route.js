@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
+import FacebookProvider from "next-auth/providers/facebook";
 import { connectDB } from "@/lib/connectDB";
 import bcrypt from "bcrypt";
 
@@ -45,11 +46,22 @@ const handler = NextAuth({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
     }),
+    FacebookProvider({
+      clientId: process.env.FACEBOOK_APPID,
+      clientSecret: process.env.FACEBOOK_SECRET,
+    }),
   ],
   pages: { signIn: "/login" },
   callbacks: {
+    async redirect({ url, baseUrl }) {
+      return baseUrl;
+    },
     async signIn({ user, account }) {
-      if (account.provider === "google" || account.provider === "github") {
+      if (
+        account.provider === "google" ||
+        account.provider === "facebook" ||
+        account.provider === "github"
+      ) {
         const { name, email, image } = user;
         try {
           const db = await connectDB();
