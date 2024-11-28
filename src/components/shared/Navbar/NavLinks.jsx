@@ -7,6 +7,7 @@ import { LuHome } from "react-icons/lu";
 import { RiServiceLine } from "react-icons/ri";
 import { TbListDetails } from "react-icons/tb";
 import { signOut, useSession } from "next-auth/react";
+import CustomBtn from "@/components/shared/Button/CustomBtn";
 
 const NavLinks = () => {
   const currentPath = usePathname();
@@ -44,9 +45,7 @@ const NavLinks = () => {
         {!session.data ? (
           <>
             <Link href="login">
-              <button className="px-2 py-2 text-black bg-primary rounded-lg hover:bg-blue-600 shadow-lg transition-all duration-300">
-                Login / Signup
-              </button>
+            <CustomBtn text="Join Us"/>
             </Link>
           </>
         ) : (
