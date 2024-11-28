@@ -28,7 +28,7 @@ const NavLinks = () => {
           } flex items-center gap-1`}
           href="/about"
         >
-          <TbListDetails  size={20} /> About
+          <TbListDetails size={20} /> About
         </Link>
         <Link
           className={`${
@@ -36,7 +36,7 @@ const NavLinks = () => {
           } flex items-center gap-1`}
           href="/contact"
         >
-          <RiServiceLine  size={20} /> Contact
+          <RiServiceLine size={20} /> Contact
         </Link>
       </div>
       {/*//* Login &Signup button added here */}

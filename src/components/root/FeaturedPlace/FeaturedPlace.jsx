@@ -7,14 +7,17 @@ import axios from "axios";
 
 const FeaturedPlace = () => {
   const [places, setPlaces] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const loadData = async () => {
-    const { data } = await axios.get(
-      `${process.env.NEXT_PUBLIC_URL}/api/all-places`
-    );
-    setPlaces(data.places);
-    setLoading(false);
+    try {
+      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/all-places`);
+      setPlaces(data.places);
+    } catch (error) {
+      console.error("Error fetching places:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -28,7 +31,18 @@ const FeaturedPlace = () => {
         description="Discover breathtaking destinations with unique attractions, vibrant culture, and unforgettable experiences. Perfect for travelers seeking adventure, relaxation, or inspiration. Explore now!"
       />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {places?.length > 0 ? (
+        {loading ? (
+          // Render skeleton placeholders while loading
+          Array.from({ length: 3 }).map((_, index) => (
+            <div key={index} className="flex w-52 flex-col gap-4">
+              <div className="skeleton h-32 w-full bg-gray-300 rounded-md animate-pulse"></div>
+              <div className="skeleton h-4 w-28 bg-gray-300 rounded-md animate-pulse"></div>
+              <div className="skeleton h-4 w-full bg-gray-300 rounded-md animate-pulse"></div>
+              <div className="skeleton h-4 w-full bg-gray-300 rounded-md animate-pulse"></div>
+            </div>
+          ))
+        ) : places?.length > 0 ? (
+          // Render actual data once loaded
           places.map((place) => (
             <FeaturedPlaceCards key={place._id} travelInfo={place} />
           ))
