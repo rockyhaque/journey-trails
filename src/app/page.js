@@ -1,5 +1,3 @@
-// import Image from "next/image";
-
 import FAQ from "@/components/root/FAQ/FAQ";
 import FeaturedPlace from "@/components/root/FeaturedPlace/FeaturedPlace";
 import Gallery from "@/components/root/Gallery/Gallery";
@@ -8,7 +6,7 @@ import Testimonial from "@/components/root/Testimonial/Testimonial";
 
 export default function Home() {
   return (
-    <div >
+    <div>
       <HeroSection />
       <Gallery />
       <FeaturedPlace />
@@ -17,4 +15,3 @@ export default function Home() {
     </div>
   );
 }
-

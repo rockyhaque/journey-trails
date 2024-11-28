@@ -3,49 +3,49 @@
 @tailwind utilities;
 
 .g-card {
-    @apply bg-white dark:bg-base-100 text-slate-500 dark:text-slate-700 shadow-xl border;
-    position: relative;
-    margin: 0 auto;
-    /* padding: 3em; */
-    border-radius: 10px;
-  
-    text-align: center;
+  @apply bg-white dark:bg-base-100 text-slate-500 dark:text-slate-700 shadow-xl border;
+  position: relative;
+  margin: 0 auto;
+  /* padding: 3em; */
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.g-card::after,
+.g-card::before {
+  content: "";
+  position: absolute;
+  height: 104.5%;
+  width: 100.5%;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  border-radius: 10px;
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent 70%,
+    indigo,
+    purple,
+    red,
+    deeppink,
+    purple,
+    indigo
+  );
+  animation: 10s gspin linear infinite;
+}
+
+.g-card::before {
+  filter: blur(1.5rem);
+  /* opacity: 0.5; */
+}
+
+@keyframes gspin {
+  0% {
+    --angle: 0deg;
   }
-  
-  .g-card::after,
-  .g-card::before {
-    content: "";
-    position: absolute;
-    height: 104.5%;
-    width: 100.5%;
-    top: 50%;
-    left: 50%;
-    translate: -50% -50%;
-    z-index: -1;
-    border-radius: 10px;
-    background-image: conic-gradient(
-      from var(--angle),
-      transparent 70%,
-      indigo,
-      purple,
-      red,
-      deeppink,
-      purple,
-      indigo
-    );
-    animation: 10s gspin linear infinite;
+  100% {
+    --angle: 360deg;
   }
-  
-  .g-card::before {
-    filter: blur(1.5rem);
-    /* opacity: 0.5; */
-  }
-  
-  @keyframes gspin {
-    0% {
-      --angle: 0deg;
-    }
-    100% {
-      --angle: 360deg;
-    }
-  }
+}
