@@ -2,21 +2,7 @@ import { Clock, MapPin, Users } from "lucide-react";
 import Image from "next/image";
 
 export default function FeaturedPlaceCards({ travelInfo }) {
-  // const travelInfo = {
-  //   id: "01",
-  //   title: "Sunny Beach Paradise",
-  //   description:
-  //     "Relax on golden sands and enjoy the calming ocean breeze at Sunny Beach Paradise.",
-  //   coverImg:
-  //     "https://i.ibb.co/56dDNys/wallace-fonseca-v-Te2-E3es6-WI-unsplash.jpg",
-  //   location: "Maldives",
-  //   peopleCountRange: "1-5",
-  //   days: 7,
-  //   discount: "10",
-  //   amount: 1500,
-  //   originalAmount: 1667, // Calculated based on discount (10%)
-  //   isFeatured: true,
-  // };
+
 
   return (
     <div className="max-w-sm overflow-hidden group border p-3 rounded-lg bg-gradient-to-r from-neutral-50 to-sky-50">
