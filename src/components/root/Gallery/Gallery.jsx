@@ -16,7 +16,7 @@ const Gallery = () => {
       {/* Section Heading */}
       <SectionHeading
         title="Gallery"
-        description="Explore our beautiful moments"
+        description="Explore our beautiful moment"
       />
 
       {/* Responsive Grid Gallery */}
