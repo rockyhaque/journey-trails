@@ -49,3 +49,10 @@
     --angle: 360deg;
   }
 }
+.aboutBG{
+  background-image: url('../../public/assets/images/about.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 400px	;
+ 
+}
