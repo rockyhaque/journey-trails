@@ -36,6 +36,7 @@ const page = () => {
     { value: "5K+", label: "Happy Travelers" },
     { value: "4.8/5", label: "Average Rating" },
   ];
+  
   return (
     <div className="container mx-auto px-4 mb-12">
       <div className="aboutBG bg-fixed container m-auto rounded-xl ">

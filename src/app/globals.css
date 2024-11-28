@@ -56,3 +56,9 @@
   height: 400px	;
  
 }
+.contactBG{
+  background-image: url('../../public/assets/images/coverBg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 500px	;
+}
