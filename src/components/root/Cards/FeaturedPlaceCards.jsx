@@ -69,7 +69,7 @@ export default function FeaturedPlaceCards({ travelInfo }) {
           {/* Pricing */}
           <div className="flex items-center gap-2 pt-2">
             <div className="text-sm text-muted-foreground line-through">
-              ${travelInfo?.originalAmount}
+              {travelInfo?.originalAmount}
             </div>
             <div className="text-xl font-bold text-rose-500">
               ${travelInfo?.amount}
