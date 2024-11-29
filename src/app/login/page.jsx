@@ -1,32 +1,66 @@
 "use client";
 import Link from "next/link";
-import { FaGithub, FaGoogle } from "react-icons/fa";
-import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import { FaGithub, FaGoogle, FaFacebook } from "react-icons/fa";
+import { signIn, useSession } from "next-auth/react";
+import Swal from "sweetalert2";
 
 const Page = () => {
   const router = useRouter();
-  const session = useSession();
+  const { data: session, status } = useSession();
+
+  if (status === "authenticated") {
+    router.push("/");
+    return null;
+  }
+
   const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+
     const res = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
     if (res.status === 200) {
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful!",
+        text: "Welcome back!",
+        timer: 2000,
+      });
       router.push("/");
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed!",
+        text: "Invalid email or password.",
+        timer: 2000,
+      });
     }
   };
-
   const handleSocialLogin = async (provider) => {
     const res = await signIn(provider, { redirect: false });
+    if (session.status === "authenticated") {
+      Swal.fire({
+        icon: "success",
+        title: "Login Successful!",
+        text: `You have logged in successfully with ${provider}.`,
+        timer: 2000,
+      }).then(() => {
+        window.location.href = "/";
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Login Failed!",
+        text: `Unable to log in with ${provider}. Please try again.`,
+        timer: 2000,
+      });
+    }
   };
-  if (session.status === "authenticated") {
-    router.push("/");
-  }
 
   return (
     <div className="w-[30%] mx-auto my-10">
@@ -41,6 +75,15 @@ const Page = () => {
           </Link>
         </p>
         <div className="my-6 space-y-4">
+          <button
+            aria-label="Login with Facebook"
+            onClick={() => signIn("facebook")}
+            type="button"
+            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600  bg-butL dark:bg-butD hover:bg-butD hover:dark:bg-butL text-paraD dark:text-headL hover:dark:text-paraD hover:text-headL"
+          >
+            <FaFacebook className="text-2xl text-blue-800" />
+            <p>Login with Facebook</p>
+          </button>
           <button
             aria-label="Login with Google"
             onClick={() => handleSocialLogin("google")}
