@@ -9,6 +9,7 @@ import { TbListDetails } from "react-icons/tb";
 import { TbLocation } from "react-icons/tb";
 import { signOut, useSession } from "next-auth/react";
 import CustomBtn from "@/components/shared/Button/CustomBtn";
+import { MdSpaceDashboard } from "react-icons/md";
 
 const NavLinks = () => {
   const currentPath = usePathname();
@@ -47,6 +48,14 @@ const NavLinks = () => {
           href="/contact"
         >
           <RiServiceLine size={20} /> Contact
+        </Link>
+        <Link
+          className={`${
+            currentPath === "/dashboard" && "g-card px-2 py-1 font-semibold"
+          } flex items-center gap-1`}
+          href="/dashboard"
+        >
+          <MdSpaceDashboard size={20} /> Dashboard
         </Link>
       </div>
       {/*//* Login &Signup button added here */}
