@@ -12,7 +12,9 @@ const FeaturedPlace = () => {
   const loadData = async () => {
     try {
       const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/all-places`);
-      setPlaces(data.places);
+      // Filter only the featured places
+      const featuredPlaces = data.places.filter((place) => place.isFeatured)
+      setPlaces(featuredPlaces);
     } catch (error) {
       console.error("Error fetching places:", error);
     } finally {

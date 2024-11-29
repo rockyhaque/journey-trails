@@ -6,6 +6,7 @@ import React from "react";
 import { LuHome } from "react-icons/lu";
 import { RiServiceLine } from "react-icons/ri";
 import { TbListDetails } from "react-icons/tb";
+import { TbLocation } from "react-icons/tb";
 import { signOut, useSession } from "next-auth/react";
 import CustomBtn from "@/components/shared/Button/CustomBtn";
 
@@ -22,6 +23,14 @@ const NavLinks = () => {
           href="/"
         >
           <LuHome size={20} /> Home
+        </Link>
+        <Link
+          className={`${
+            currentPath === "/destinations" && "g-card px-2 py-1 font-semibold"
+          } flex items-center gap-1`}
+          href="/destinations"
+        >
+          <TbLocation size={20} /> Destinations
         </Link>
         <Link
           className={`${
@@ -45,7 +54,7 @@ const NavLinks = () => {
         {!session.data ? (
           <>
             <Link href="login">
-            <CustomBtn text="Join Us"/>
+              <CustomBtn text="Join Us" />
             </Link>
           </>
         ) : (

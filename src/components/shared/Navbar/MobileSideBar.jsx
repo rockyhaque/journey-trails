@@ -7,7 +7,7 @@ import logo from "../../../../public/assets/logo/logo.png";
 import { LuHome } from "react-icons/lu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { TbListDetails } from "react-icons/tb";
+import { TbListDetails, TbLocation } from "react-icons/tb";
 import { RiServiceLine } from "react-icons/ri";
 import CustomBtn from "@/components/shared/Button/CustomBtn";
 import { signOut, useSession } from "next-auth/react";
@@ -93,6 +93,15 @@ const MobileSideBar = () => {
             </Link>
             <Link
               className={`${
+                currentPath === "/destinations" &&
+                "g-card px-2 py-1 font-semibold"
+              } flex items-center gap-1`}
+              href="/destinations"
+            >
+              <TbLocation size={20} /> Destinations
+            </Link>
+            <Link
+              className={`${
                 currentPath === "/about" && "g-card px-2 py-1 font-semibold"
               } flex items-center gap-1`}
               href="/about"
@@ -109,14 +118,16 @@ const MobileSideBar = () => {
             </Link>
 
             <div>
-            {!session.data ? (
+              {!session.data ? (
                 <>
                   <Link href="login">
                     <CustomBtn text="SignIn / SignUp" />
                   </Link>
                 </>
               ) : (
-                <button className="btn bg-rose-500" onClick={() => signOut()}>Logout</button>
+                <button className="btn bg-rose-500" onClick={() => signOut()}>
+                  Logout
+                </button>
               )}
             </div>
           </ul>
