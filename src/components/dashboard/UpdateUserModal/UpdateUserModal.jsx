@@ -1,3 +1,4 @@
+
 import { Fragment, useState } from 'react'
 import {
     Dialog,
@@ -6,8 +7,9 @@ import {
     DialogTitle,
     DialogPanel,
 } from '@headlessui/react'
+const roles = [ 'user', 'admin']
 
-const TouristBookingModal = ({ setIsOpen, isOpen,  modalHandler }) => {
+const UpdateUserModal = ({ setIsOpen, isOpen,  modalHandler }) => {
     const [selected, setSelected] = useState('Tourist')
 
     
@@ -46,24 +48,26 @@ const TouristBookingModal = ({ setIsOpen, isOpen,  modalHandler }) => {
                                     as='h3'
                                     className='text-lg font-medium text-center leading-6 text-gray-900'
                                 >
-                                    Payment To Card
+                                    Update User Role
                                 </DialogTitle>
                                 <div className='mt-4 w-full'>
-                                <div className='flex justify-between'>
-                                    <h3 className='text-xl'>Place Name</h3>
-                                    <p>Date: 28/11/2024</p>
-                                </div>
+
+                                    {/* =========== role set select ========== */}
+                                    <select defaultValue={selected} onChange={(e) => setSelected(e.target.value)} className='w-full border rounded-lg '>
+                                        {
+                                            roles.map(role => <option key={role}>{role}</option>)
+                                        }
+                                    </select>
                                 </div>
                                 <hr className='mt-16 ' />
 
                                 <div className='flex mt-2 justify-center gap-5'>
-                                  
                                     <button
                                         type='button'
-                                        className='text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2'
+                                        className='inline-flex justify-center rounded-md border border-transparent bg-cyan-100 px-4 py-2 text-sm font-medium text-cyan-900 hover:bg-cyan-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 focus-visible:ring-offset-2'
                                         onClick={() => modalHandler(selected)}
                                     >
-                                        Payment - 2025$
+                                        Update
                                     </button>
                                     <button
                                         type='button'
@@ -80,6 +84,7 @@ const TouristBookingModal = ({ setIsOpen, isOpen,  modalHandler }) => {
             </Dialog>
         </Transition>
     )
-};
+}
 
-export default TouristBookingModal;
+
+export default UpdateUserModal
