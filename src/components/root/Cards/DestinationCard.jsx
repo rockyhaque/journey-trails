@@ -66,7 +66,7 @@ export default function DestinationCard({ travelInfo }) {
 
       {/* button section */}
       <div className="flex justify-center items-center mt-4 w-full">
-        <Link href={`/destinations/01`}>
+        <Link href={`/destinations/${travelInfo?._id}`} className="w-2/3">
           <CustomBtn text="Details" customClass="w-full" />
         </Link>
       </div>
