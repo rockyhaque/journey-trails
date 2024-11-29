@@ -2,7 +2,7 @@ import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import Image from "next/image";
 import { RiDeleteBin6Line } from "react-icons/ri";
 
-const TouristPage = () => {
+const WishlistPage = () => {
   return (
     <div>
       <SectionHeading
@@ -103,4 +103,4 @@ const TouristPage = () => {
   );
 };
 
-export default TouristPage;
+export default WishlistPage;

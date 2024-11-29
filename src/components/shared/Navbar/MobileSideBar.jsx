@@ -8,6 +8,7 @@ import { LuHome } from "react-icons/lu";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TbListDetails, TbLocation } from "react-icons/tb";
+import { MdSpaceDashboard } from "react-icons/md";
 import { RiServiceLine } from "react-icons/ri";
 import CustomBtn from "@/components/shared/Button/CustomBtn";
 import { signOut, useSession } from "next-auth/react";
@@ -115,6 +116,14 @@ const MobileSideBar = () => {
               href="/contact"
             >
               <RiServiceLine size={20} /> Contact
+            </Link>
+            <Link
+              className={`${
+                currentPath === "/dashboard" && "g-card px-2 py-1 font-semibold"
+              } flex items-center gap-1`}
+              href="/dashboard"
+            >
+              <MdSpaceDashboard size={20} /> Dashboard
             </Link>
 
             <div>
