@@ -13,7 +13,7 @@ export const connectDB = async () => {
       },
     });
     await client.connect();
-    db = client.db("journey-trails-flat");
+    db = client.db("journey-trails");
     console.log("Connected to database:", db.databaseName);
     return db;
   } catch (error) {
