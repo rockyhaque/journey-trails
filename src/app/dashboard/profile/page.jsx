@@ -8,9 +8,7 @@ const TouristProfile = () => {
       {/* Header Section */}
       <div className="flex justify-between items-center border-b border-gray-200 pb-4">
         <h1 className="text-3xl font-bold">Tourist Profile</h1>
-
       </div>
-
       {/* Profile Section */}
       <div className="flex items-center mt-6">
         <Image
@@ -30,7 +28,6 @@ const TouristProfile = () => {
           </p>
         </div>
       </div>
-
       {/* User Stats */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
         <div className="bg-gray-300 p-6 rounded-lg text-center shadow-lg hover:bg-gray-400 transition transform hover:-translate-y-1">
