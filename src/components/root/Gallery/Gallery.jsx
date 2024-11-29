@@ -19,6 +19,7 @@ const Gallery = () => {
         description="Explore our vibrant Image Gallery, a curated collection showcasing captivating visuals that tell compelling stories."
       />
 
+
       {/* Responsive Grid Gallery */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
         {/* Column 1 */}
