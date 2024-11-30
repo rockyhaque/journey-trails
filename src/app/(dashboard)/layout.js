@@ -1,4 +1,4 @@
-import Sidebar from "@/components/shared/Sidebar/Sidebar";
+import Sidebar from "@/components/dashboard/SideBar/SideBar";
 import "../globals.css";
 
 export const metadata = {
@@ -7,15 +7,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="light">
-      <body className="h-screen md:flex">
-        <div className="w-1/6">
-          <Sidebar />
-        </div>
-        <div className="w-5/6">
-          {children}
-        </div>
-      </body>
-    </html>
+    <div className="flex min-h-screen">
+      <div className="w-1/6">
+        <Sidebar />
+      </div>
+      <div className="w-5/6 min-h-screen overflow-auto">{children}</div>
+    </div>
   );
 }

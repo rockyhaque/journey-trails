@@ -1,12 +1,18 @@
 "use client";
 import Link from "next/link";
+import Swal from "sweetalert2";
+import { useState } from "react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import Swal from "sweetalert2";
+import { FaFacebook, FaGoogle } from "react-icons/fa";
+import Spinner from "@/components/shared/Spinner/Spinner";
 
 const Page = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const { data: session } = useSession();
+
   if (session) {
     router.push("/");
   }
@@ -16,38 +22,87 @@ const Page = () => {
       name: e.target.name.value,
       email: e.target.email.value,
       image: e.target.photo.value,
-      password: e.target.password.value,
+      role: "tourist",
     };
-    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signup/api`, {
-      method: "POST",
-      body: JSON.stringify(newUser),
-      headers: {
-        "content-type": "application/json",
-      },
-    });
-    if (res.status === 200) {
-      e.target.reset();
+    setLoading(true);
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signup/api`, {
+        method: "POST",
+        body: JSON.stringify(newUser),
+        headers: {
+          "content-type": "application/json",
+        },
+      });
+      if (res.status === 200) {
+        e.target.reset();
+        const signInRes = await signIn("credentials", {
+          redirect: false,
+          email: newUser.email,
+          password: newUser.password,
+        });
+        if (signInRes?.error) {
+          Swal.fire({
+            icon: "error",
+            title: "Sign In Failed",
+            text: "There was an error logging you in. Please try again.",
+          });
+        } else {
+          Swal.fire({
+            icon: "success",
+            title: "Account Created and Logged In Successfully!",
+            text: "You are now logged in.",
+            timer: 2000,
+            willClose: () => {
+              router.push("/");
+            },
+          });
+        }
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Sign Up Failed!",
+          text: "Please try again later.",
+          timer: 3000,
+        });
+      }
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Something Went Wrong!",
+        text: "Please try again later.",
+        timer: 3000,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+  const handleSocialLogin = async (provider) => {
+    setLoading(true);
+    const res = await signIn(provider, { redirect: false });
+    setLoading(false);
+    if (session.status === "authenticated") {
       Swal.fire({
         icon: "success",
-        title: "Account Created Successfully!",
-        text: "You can now log in to your account.",
+        title: "Login Successful!",
+        text: `You have logged in successfully with ${provider}.`,
         timer: 2000,
-        willClose: () => {
-          router.push("/");
-        },
+      }).then(() => {
+        window.location.href = "/";
       });
     } else {
       Swal.fire({
         icon: "error",
-        title: "Sign Up Failed!",
-        text: "Please try again later.",
-        timer: 3000,
+        title: "Login Failed!",
+        text: `Unable to log in with ${provider}. Please try again.`,
+        timer: 2000,
       });
     }
   };
 
   return (
     <div className="w-[30%] mx-auto my-10">
+      {loading && <Spinner />}
       <div className="h-full p-4 rounded-md shadow sm:p-8 bg-slate-300">
         <p className="text-sm text-center dark:text-gray-600 mb-10">
           Already have account?
@@ -58,6 +113,31 @@ const Page = () => {
             Sign in
           </Link>
         </p>
+        <div className="my-6 space-y-4">
+          <button
+            aria-label="Login with Facebook"
+            onClick={() => signIn("facebook")}
+            type="button"
+            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 "
+          >
+            <FaFacebook className="text-2xl text-blue-800" />
+            <p>Login with Facebook</p>
+          </button>
+          <button
+            aria-label="Login with Google"
+            onClick={() => handleSocialLogin("google")}
+            type="button"
+            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1"
+          >
+            <FaGoogle className="text-2xl text-[#E34032]" />
+            <p>Login with Google</p>
+          </button>
+        </div>
+        <div className="flex items-center w-full my-4">
+          <hr className="w-full dark:text-gray-600" />
+          <p className="px-3 dark:text-gray-600">OR</p>
+          <hr className="w-full dark:text-gray-600" />
+        </div>
 
         <form onSubmit={handleSignUp} className="space-y-8">
           <div className="space-y-4">
@@ -132,7 +212,7 @@ const Page = () => {
               </a>
             </div>
           </div>
-          <button className="btn bg-butL dark:bg-butD hover:bg-butD hover:dark:bg-butL text-paraD dark:text-headL hover:dark:text-paraD hover:text-headL w-full px-8 py-3 font-semibold rounded-md  dark:bg-violet-600 dark:text-gray-50  ">
+          <button className="btn w-full px-8 py-3 font-semibold rounded-md ">
             Sign Up
           </button>
         </form>

@@ -1,10 +1,8 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import GitHubProvider from "next-auth/providers/github";
 import FacebookProvider from "next-auth/providers/facebook";
 import { connectDB } from "@/lib/connectDB";
-import bcrypt from "bcrypt";
 
 const handler = NextAuth({
   session: {
@@ -28,23 +26,12 @@ const handler = NextAuth({
         if (!currentUser) {
           return null;
         }
-        const passwordMatched = bcrypt.compareSync(
-          password,
-          currentUser.password
-        );
-        if (!passwordMatched) {
-          return null;
-        }
         return currentUser;
       },
     }),
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    }),
-    GitHubProvider({
-      clientId: process.env.GITHUB_ID,
-      clientSecret: process.env.GITHUB_SECRET,
     }),
     FacebookProvider({
       clientId: process.env.FACEBOOK_APPID,
@@ -57,19 +44,15 @@ const handler = NextAuth({
       return baseUrl;
     },
     async signIn({ user, account }) {
-      if (
-        account.provider === "google" ||
-        account.provider === "facebook" ||
-        account.provider === "github"
-      ) {
-        const { name, email, image } = user;
+      if (account.provider === "google" || account.provider === "facebook") {
+        const { email } = user;
         try {
           const db = await connectDB();
           const userCollection = db.collection("users");
           const userExists = await userCollection.findOne({ email });
 
           if (!userExists) {
-            await userCollection.insertOne(user);
+            await userCollection.insertOne({ ...user, role: "tourist" });
           }
           return true;
         } catch (err) {

@@ -36,7 +36,7 @@ const page = () => {
     { value: "5K+", label: "Happy Travelers" },
     { value: "4.8/5", label: "Average Rating" },
   ];
-  
+
   return (
     <div className="container mx-auto px-4 mb-12">
       <div className="aboutBG bg-fixed container m-auto rounded-xl ">
@@ -102,7 +102,9 @@ const page = () => {
             <li>24/7 support to make your journey stress-free.</li>
           </ul>
         </div>
-        <div className="bg-white shadow-md rounded-lg p-6 w-full mx-auto lg:ml-52 ">
+      </div>
+      <div className="w-[50%] mx-auto my-10">
+        <div className="bg-white shadow-md rounded-lg p-6">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 gap-6">
             {stats.map((stat, index) => (
               <div
