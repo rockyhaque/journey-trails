@@ -11,15 +11,15 @@ const Page = () => {
 
   const contactInfo = [
     {
-      icon: <IoSearchOutline className="text-3xl text-purple-600" />,
+      icon: <IoSearchOutline className="text-3xl text-blue-600" />,
       label: "102 Street 2714 Don",
     },
     {
-      icon: <FaPhoneVolume className="text-3xl text-purple-600" />,
+      icon: <FaPhoneVolume className="text-3xl text-blue-600" />,
       label: "+88 1234 567",
     },
     {
-      icon: <MdOutlineMarkEmailUnread className="text-3xl text-purple-600" />,
+      icon: <MdOutlineMarkEmailUnread className="text-3xl text-blue-600" />,
       label: "hello@flowbase.com",
     },
   ];
@@ -39,10 +39,10 @@ const Page = () => {
 
     emailjs
       .sendForm(
-        process.env.NEXT_SERVICE_ID,
-        process.env.NEXT_TEMPLATE_ID,
-        form.current,
-        process.env.NEXT_KEY
+        process.env.NEXT_EMAIL_SERVICE_ID, // Your service ID
+        process.env.NEXT_EMAIL_TEMPLATE_ID, // Your template ID
+        form.current, // The form reference
+        process.env.NEXT_EMAIL_KEY // Your public key       // Your public key
       )
       .then(
         () => {
@@ -85,7 +85,7 @@ const Page = () => {
             {contactInfo.map((info, index) => (
               <div
                 key={index}
-                className="flex flex-col items-center justify-center p-6 bg-orange-100 shadow-md shadow-indigo-400 rounded-lg text-center transition-transform duration-300 hover:scale-105 hover:bg-white"
+                className="flex flex-col items-center justify-center p-6 bg-cyan-50 shadow-md shadow-blue-400 rounded-lg text-center transition-transform duration-300 hover:scale-105 hover:bg-white"
               >
                 {/* Icon */}
                 <div>{info.icon}</div>
@@ -100,7 +100,7 @@ const Page = () => {
         <div className="max-w-xl mx-auto flex items-center justify-center px-4">
           <div className="container mt-14 gap-6">
             <div className="w-full bg-white p-6 rounded-lg shadow-lg">
-              <h2 className="text-xl sm:text-2xl font-semibold text-center text-indigo-600">
+              <h2 className="text-xl sm:text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500  to-blue-900">
                 Message Us
               </h2>
               <p className="text-center text-sm sm:text-base mb-4">
@@ -151,7 +151,7 @@ const Page = () => {
                   className={`w-full mt-4 px-4 py-2 font-medium text-white rounded-md ${
                     isLoading
                       ? "bg-gray-500 cursor-not-allowed"
-                      : "bg-indigo-600 hover:bg-indigo-700"
+                      : "text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-sm px-3 py-2 text-center me-2 mb-2"
                   }`}
                 >
                   {isLoading ? "Sending..." : "Send Message"}
@@ -167,7 +167,7 @@ const Page = () => {
         {/* Map Section */}
         <div className="mt-20 text-center">
           <FaLocationDot className="text-4xl m-auto mt-5 text-center text-red-700" />
-          <h3 className="text-2xl sm:text-3xl font-semibold text-indigo-600">
+          <h3 className="text-xl sm:text-2xl font-semibold text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-500  to-blue-900">
             Our Location
           </h3>
         </div>

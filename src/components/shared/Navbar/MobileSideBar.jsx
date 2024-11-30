@@ -42,7 +42,7 @@ const MobileSideBar = () => {
 
         {/* Menu Items */}
         <div
-          className={`fixed top-0 left-0 w-[320px] h-full bg-base-200 transition-transform duration-500 ease-in-out z-50 ${
+          className={`fixed top-0 left-0 w-[320px] h-full bg-white transition-transform duration-500 ease-in-out z-50 ${
             click ? "translate-x-0" : "-translate-x-full"
           }`}
         >
@@ -70,7 +70,7 @@ const MobileSideBar = () => {
 
           {/* Scrollable Content with Hidden Scrollbar */}
           <ul
-            className="overflow-y-scroll p-4 space-y-4 text-center text-3xl "
+            className="overflow-y-scroll p-4 space-y-4 text-center text-3xl bg-base-200 "
             style={{
               maxHeight: "calc(100vh - 64px)",
               scrollbarWidth: "none" /* For Firefox */,
@@ -86,8 +86,8 @@ const MobileSideBar = () => {
             </div>
             <Link
               className={`${
-                currentPath === "/" && "g-card px-2 py-1 font-semibold"
-              } flex items-center gap-1`}
+                currentPath === "/" && "g-card px-2 py-1 text-2xl font-semibold"
+              } flex items-center text-2xl gap-1`}
               href="/"
             >
               <LuHome size={20} /> Home
@@ -95,38 +95,38 @@ const MobileSideBar = () => {
             <Link
               className={`${
                 currentPath === "/destinations" &&
-                "g-card px-2 py-1 font-semibold"
-              } flex items-center gap-1`}
+                "g-card px-2 py-1 font-semibold text-2xl"
+              } flex items-center gap-1 text-2xl`}
               href="/destinations"
             >
               <TbLocation size={20} /> Destinations
             </Link>
             <Link
               className={`${
-                currentPath === "/about" && "g-card px-2 py-1 font-semibold"
-              } flex items-center gap-1`}
+                currentPath === "/about" && "g-card px-2 py-1 text-2xl font-semibold"
+              } flex items-center text-2xl gap-1`}
               href="/about"
             >
               <TbListDetails size={20} /> About
             </Link>
             <Link
               className={`${
-                currentPath === "/contact" && "g-card px-2 py-1 font-semibold"
-              } flex items-center gap-1`}
+                currentPath === "/contact" && "g-card px-2 py-1 text-2xl font-semibold"
+              } flex items-center text-2xl gap-1`}
               href="/contact"
             >
               <RiServiceLine size={20} /> Contact
             </Link>
             <Link
               className={`${
-                currentPath === "/dashboard" && "g-card px-2 py-1 font-semibold"
-              } flex items-center gap-1`}
+                currentPath === "/dashboard" && "g-card px-2 py-1 text-2xl font-semibold"
+              } flex items-center gap-1 text-2xl`}
               href="/dashboard/profile"
             >
               <MdSpaceDashboard size={20} /> Dashboard
             </Link>
 
-            <div>
+            <div className="flex justify-start text-xl font-bold px-2">
               {!session.data ? (
                 <>
                   <Link href="login">

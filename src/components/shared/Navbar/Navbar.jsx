@@ -1,13 +1,15 @@
-import React from "react";
 import NavLinks from "@/components/shared/Navbar/NavLinks";
 import NavTitle from "@/components/shared/Navbar/NavTitle";
 
 const Navbar = () => {
   return (
-    <nav className="bg-cyan-100 bg-opacity-60 border-b mb-5 custom-glass-2 py-3 sticky top-0 z-10">
+    <nav className="bg-background border-b border-border mb-5 backdrop-blur-lg bg-opacity-75 py-3 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between a">
-          <NavTitle></NavTitle>
+        <div className="flex items-center justify-between">
+          {/* Nav Title */}
+          <NavTitle />
+
+          {/* Navigation Links */}
           <NavLinks />
         </div>
       </div>
