@@ -27,7 +27,7 @@ const Page = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/signup/api`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/users`, {
         method: "POST",
         body: JSON.stringify(newUser),
         headers: {
