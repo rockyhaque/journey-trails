@@ -53,7 +53,7 @@ const NavLinks = () => {
           className={`${
             currentPath === "/dashboard" && "g-card px-2 py-1 font-semibold"
           } flex items-center gap-1`}
-          href="/dashboard"
+          href="/dashboard/profile"
         >
           <MdSpaceDashboard size={20} /> Dashboard
         </Link>
