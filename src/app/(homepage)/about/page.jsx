@@ -1,7 +1,7 @@
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import Image from "next/image";
 import React from "react";
-import aboutImage from "../../../public/assets/images/aboutUs.jpg";
+import aboutImage from "../../../../public/assets/images/aboutUs.jpg";
 const page = () => {
   const teamMembers = [
     {
