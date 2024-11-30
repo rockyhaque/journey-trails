@@ -56,7 +56,7 @@ const NavLinks = () => {
         {!session.data ? (
           <>
             <Link href="login">
-              <CustomBtn text="SIGN IN" />
+              <CustomBtn text="SIGN IN" customClass="l-card" />
             </Link>
           </>
         ) : (

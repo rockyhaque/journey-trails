@@ -26,7 +26,7 @@ const page = () => {
     },
     {
       name: "Ali Akbor Titu",
-      title: "UI/UX Designer",
+      title: "Frontend Developer",
       image: "https://i.ibb.co.com/vsXRHQH/Iffarur-Rahat.jpg",
     },
   ];

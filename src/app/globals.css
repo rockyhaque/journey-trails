@@ -49,6 +49,53 @@
     --angle: 360deg;
   }
 }
+.l-card {
+  @apply bg-white dark:bg-base-100 text-white dark:text-white shadow-xl border;
+  position: relative;
+  margin: 0 auto;
+  /* padding: 3em; */
+  border-radius: 10px;
+
+  text-align: center;
+}
+
+.l-card::after,
+.l-card::before {
+  content: "";
+  position: absolute;
+  height: 104.5%;
+  width: 100.5%;
+  top: 50%;
+  left: 50%;
+  translate: -50% -50%;
+  z-index: -1;
+  border-radius: 10px;
+  background-image: conic-gradient(
+    from var(--angle),
+    transparent 70%,
+    indigo,
+    purple,
+    red,
+    deeppink,
+    purple,
+    indigo
+  );
+  animation: 10s gspin linear infinite;
+}
+
+.l-card::before {
+  filter: blur(1.5rem);
+  /* opacity: 0.5; */
+}
+
+@keyframes gspin {
+  0% {
+    --angle: 0deg;
+  }
+  100% {
+    --angle: 360deg;
+  }
+}
 .aboutBG{
   background-image: url('../../public/assets/images/about.jpg');
   background-repeat: no-repeat;
@@ -61,4 +108,12 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 500px	;
+}
+.custom-glass-2 {
+  @apply dark:bg-zinc-900 dark:border-zinc-800;
+  background: rgba(255, 255, 255, 0.24);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(6.4px);
+  -webkit-backdrop-filter: blur(6.4px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }

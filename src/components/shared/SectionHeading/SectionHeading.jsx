@@ -9,8 +9,8 @@ const montserrat = Montserrat({
 const SectionHeading = ({ title, description }) => {
   return (
     <div className="text-center py-12">
-      <h1 className={`${montserrat.className} text-2xl font-semibold bg-gradient-to-r from-cyan-900 to-blue-900 bg-clip-text text-transparent`}>{title}</h1>
-      <p className="text-md w-1/2 mx-auto mt-2">{description}</p>
+      <h1 className={`${montserrat.className} text-3xl font-semibold bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-900`}>--- {title} ---</h1>
+      <p className="text-md w-1/2 mx-auto mt-2 text-gray-500">{description}</p>
     </div>
   );
 };

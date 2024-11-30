@@ -31,7 +31,7 @@ export default function DestinationCard({ travelInfo }) {
       </div>
 
       {/* Content Section */}
-      <div className="flex justify-between ml-2 mt-2">
+      <div className="flex justify-between ml-2 mt-2 h-36">
         <div className="space-y-3">
           {/* Location */}
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
