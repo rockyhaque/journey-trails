@@ -7,7 +7,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html>
+    <html lang="en" data-theme="light">
       <body className="h-screen md:flex">
         <div className="w-1/6">
           <Sidebar />
