@@ -1,29 +1,34 @@
 "use client";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FaGithub, FaGoogle, FaFacebook } from "react-icons/fa";
-import { signIn, useSession } from "next-auth/react";
 import Swal from "sweetalert2";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+import { FaGoogle, FaFacebook } from "react-icons/fa";
+import Spinner from "@/components/shared/Spinner/Spinner";
 
 const Page = () => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
 
   if (status === "authenticated") {
     router.push("/");
     return null;
   }
-
   const handleLogin = async (e) => {
     e.preventDefault();
     const email = e.target.email.value;
     const password = e.target.password.value;
+    setLoading(true);
 
     const res = await signIn("credentials", {
       email,
       password,
       redirect: false,
     });
+    setLoading(false);
+
     if (res.status === 200) {
       Swal.fire({
         icon: "success",
@@ -42,7 +47,9 @@ const Page = () => {
     }
   };
   const handleSocialLogin = async (provider) => {
+    setLoading(true);
     const res = await signIn(provider, { redirect: false });
+    setLoading(false);
     if (session.status === "authenticated") {
       Swal.fire({
         icon: "success",
@@ -61,7 +68,6 @@ const Page = () => {
       });
     }
   };
-
   return (
     <div className="w-[30%] mx-auto my-10">
       <div className="p-4 rounded-md shadow bg-slate-300  h-full">
@@ -79,7 +85,7 @@ const Page = () => {
             aria-label="Login with Facebook"
             onClick={() => signIn("facebook")}
             type="button"
-            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600  bg-butL dark:bg-butD hover:bg-butD hover:dark:bg-butL text-paraD dark:text-headL hover:dark:text-paraD hover:text-headL"
+            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1"
           >
             <FaFacebook className="text-2xl text-blue-800" />
             <p>Login with Facebook</p>
@@ -88,19 +94,10 @@ const Page = () => {
             aria-label="Login with Google"
             onClick={() => handleSocialLogin("google")}
             type="button"
-            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600  bg-butL dark:bg-butD hover:bg-butD hover:dark:bg-butL text-paraD dark:text-headL hover:dark:text-paraD hover:text-headL  "
+            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1"
           >
             <FaGoogle className="text-2xl text-[#E34032]" />
             <p>Login with Google</p>
-          </button>
-          <button
-            onClick={() => handleSocialLogin("github")}
-            aria-label="Login with GitHub"
-            role="button"
-            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1 dark:border-gray-600 focus:dark:ring-violet-600  bg-butL dark:bg-butD hover:bg-butD hover:dark:bg-butL text-paraD dark:text-headL hover:dark:text-paraD hover:text-headL"
-          >
-            <FaGithub className="text-2xl text-secondary" />
-            <p>Login with GitHub</p>
           </button>
         </div>
         <div className="flex items-center w-full my-4">
@@ -148,11 +145,15 @@ const Page = () => {
               </a>
             </div>
           </div>
-          <button className="btn  w-full px-8 py-3 font-semibold rounded-md">
-            Sign in
+          <button
+            className="btn w-full px-8 py-3 font-semibold rounded-md"
+            disabled={loading}
+          >
+            Sign In
           </button>
         </form>
       </div>
+      {loading && <Spinner />}
     </div>
   );
 };

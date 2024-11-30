@@ -3,20 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
-import { LuHome } from "react-icons/lu";
+import { LuHome, LuLogOut } from "react-icons/lu";
 import { RiServiceLine } from "react-icons/ri";
 import { TbListDetails } from "react-icons/tb";
 import { TbLocation } from "react-icons/tb";
 import { signOut, useSession } from "next-auth/react";
 import CustomBtn from "@/components/shared/Button/CustomBtn";
 import { MdSpaceDashboard } from "react-icons/md";
+import { FaRegUser } from "react-icons/fa";
 
 const NavLinks = () => {
   const currentPath = usePathname();
   const session = useSession();
   return (
     <div className="hidden md:hidden lg:flex gap-5">
-      <div className="flex gap-10 items-center text-slate-600">
+      <div className="flex gap-4 items-center text-slate-600">
         <Link
           className={`${
             currentPath === "/" && "g-card px-2 py-1 font-semibold"
@@ -49,21 +50,13 @@ const NavLinks = () => {
         >
           <RiServiceLine size={20} /> Contact
         </Link>
-        <Link
-          className={`${
-            currentPath === "/dashboard" && "g-card px-2 py-1 font-semibold"
-          } flex items-center gap-1`}
-          href="/dashboard/profile"
-        >
-          <MdSpaceDashboard size={20} /> Dashboard
-        </Link>
       </div>
       {/*//* Login &Signup button added here */}
       <div className="login-Signup">
         {!session.data ? (
           <>
             <Link href="login">
-              <CustomBtn text="Join Us" />
+              <CustomBtn text="SIGN IN" />
             </Link>
           </>
         ) : (
@@ -90,13 +83,26 @@ const NavLinks = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
-                <a className="justify-between">
-                  {session?.data?.user?.name}
-                  <span className="badge">Profile</span>
+                <a>
+                  <FaRegUser /> {session?.data?.user?.name}
                 </a>
               </li>
               <li>
-                <button onClick={() => signOut()}>Logout</button>
+                <Link
+                  className={`${
+                    currentPath === "/dashboard" &&
+                    "g-card px-2 py-1 font-semibold"
+                  } flex items-center gap-1`}
+                  href="/dashboard/profile"
+                >
+                  <MdSpaceDashboard /> Dashboard
+                </Link>
+              </li>
+              <li>
+                <button onClick={() => signOut()}>
+                  <LuLogOut />
+                  Logout
+                </button>
               </li>
             </ul>
           </div>

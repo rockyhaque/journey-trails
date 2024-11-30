@@ -1,4 +1,4 @@
-import Sidebar from "@/components/shared/Sidebar/Sidebar";
+import Sidebar from "@/components/dashboard/Sidebar/Sidebar";
 import "../globals.css";
 
 export const metadata = {
