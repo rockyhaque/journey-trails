@@ -7,14 +7,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" data-theme="light">
+    <html>
       <body className="h-screen md:flex">
         <div className="w-1/6">
           <Sidebar />
         </div>
-        <div className="w-5/6">
-          {children}
-        </div>
+        <div className="w-5/6">{children}</div>
       </body>
     </html>
   );
