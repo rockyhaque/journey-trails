@@ -1,6 +1,8 @@
 "use client"; // Error boundaries must be Client Components
 
+import Link from "next/link";
 import { useEffect } from "react";
+import { AiOutlineWarning } from "react-icons/ai";
 
 export default function Error({ error, reset }) {
   useEffect(() => {
@@ -9,38 +11,30 @@ export default function Error({ error, reset }) {
   }, [error]);
 
   return (
-    <div>
-      <section classname="flex items-center h-full p-16 dark:bg-gray-50 dark:text-gray-800">
-        <div classname="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-          <div classname="max-w-md text-center">
-            <h2 classname="mb-8 font-extrabold text-9xl dark:text-gray-400">
-              <span classname="sr-only">Error</span>404
-            </h2>
-            <p classname="text-2xl font-semibold md:text-3xl">
-              Sorry, we couldn't find this page.
-            </p>
-            <p classname="mt-4 mb-8 dark:text-gray-600">
-              But dont worry, you can find plenty of other things on our
-              homepage.
-            </p>
-            <a
-              rel="noopener noreferrer"
-              href="#"
-              classname="px-8 py-3 font-semibold rounded dark:bg-violet-600 dark:text-gray-50"
-            >
-              Back to homepage
-            </a>
-          </div>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-50 via-cyan-100 to-cyan-600 text-gray-100">
+      <section className="flex flex-col items-center text-center p-8 bg-white/80 backdrop-blur-md rounded-lg shadow-lg dark:bg-gray-900/70">
+        <AiOutlineWarning className="text-6xl text-cyan-600 mb-4" />
+        <h2 className="mb-4 text-4xl font-extrabold text-gray-800 dark:text-gray-200">
+          Oops! Something went wrong.
+        </h2>
+        <p className="mb-6 text-lg text-gray-600 dark:text-gray-400">
+          We couldn't process your request. Please try again or return to the homepage.
+        </p>
+        <div className="flex gap-4">
+          <button
+            onClick={() => reset()}
+            className="px-6 py-3 font-semibold text-white bg-gradient-to-r from-cyan-500 to-cyan-700 rounded-lg shadow-md hover:shadow-lg transition-transform transform hover:scale-105"
+          >
+            Try Again
+          </button>
+          <Link
+            href="/"
+            className="px-6 py-3 font-semibold text-cyan-600 border border-cyan-600 rounded-lg shadow-md hover:bg-cyan-600 hover:text-white hover:shadow-lg transition-transform transform hover:scale-105"
+          >
+            Back to Homepage
+          </Link>
         </div>
       </section>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
     </div>
   );
 }

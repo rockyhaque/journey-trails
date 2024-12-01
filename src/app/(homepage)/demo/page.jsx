@@ -1,5 +1,7 @@
 import DestinationDetails from '@/components/draft/DestinationDetails';
 import Login from '@/components/draft/Login';
+import ModernDetails from '@/components/draft/ModernDetails';
+import ModernLogin from '@/components/draft/ModernLogin';
 import Signup from '@/components/draft/Signup';
 import React from 'react';
 
@@ -13,6 +15,11 @@ const DemoPage = () => {
             <Signup />
             <br />
             <DestinationDetails />
+            <br />
+            <ModernLogin />
+            <br />
+            <ModernDetails />
+
         </div>
     );
 };

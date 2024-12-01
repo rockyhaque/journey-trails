@@ -63,7 +63,7 @@
 .l-card::before {
   content: "";
   position: absolute;
-  height: 104.5%;
+  height: 100.5%;
   width: 100.5%;
   top: 50%;
   left: 50%;
@@ -75,7 +75,7 @@
     transparent 70%,
     indigo,
     purple,
-    red,
+    rgb(25, 0, 255),
     deeppink,
     purple,
     indigo
@@ -109,11 +109,4 @@
   background-size: cover;
   height: 500px	;
 }
-.custom-glass-2 {
-  @apply dark:bg-zinc-900 dark:border-zinc-800;
-  background: rgba(255, 255, 255, 0.24);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(6.4px);
-  -webkit-backdrop-filter: blur(6.4px);
-  border: 1px solid rgba(255, 255, 255, 0.3);
-}
+  
