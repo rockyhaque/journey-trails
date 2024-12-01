@@ -1,9 +1,9 @@
 "use client";
 import CustomBtn from "@/components/shared/Button/CustomBtn";
-import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import Container from "@/components/ui/Container";
+import Link from "next/link";
 import React from "react";
-
+import { GoChevronRight } from "react-icons/go";
 const AddPlacePage = () => {
   const handleAddPlace = (event) => {
     event.preventDefault();
@@ -26,10 +26,19 @@ const AddPlacePage = () => {
 
   return (
     <div>
-      <SectionHeading
-        title="Add Place for Admin"
-        description="Added places where people want to go!!"
-      />
+      <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600" >
+        <ul className="px-5">
+          <Link href="/">
+            <li className=" text-white">Home</li>
+          </Link>
+          <GoChevronRight className="text-lg font-bold text-white"/>
+          <Link href="/dashboard/add-place">
+          <li className="text-lg font-bold text-cyan-600">
+            Add Place
+          </li>
+          </Link>
+        </ul>
+      </div>
 
       <div>
         <Container>

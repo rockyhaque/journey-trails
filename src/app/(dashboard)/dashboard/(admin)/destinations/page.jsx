@@ -1,16 +1,26 @@
-import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import Image from "next/image";
 import React from "react";
 import { MdEditLocationAlt } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BiDetail } from "react-icons/bi";
+import { GoChevronRight } from "react-icons/go";
+import Link from "next/link";
 const DestinationsPage = () => {
   return (
     <div>
-      <SectionHeading
-        title="All Destinations"
-        description="Check all destinations"
-      ></SectionHeading>
+         <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600">
+        <ul className="px-5">
+          <Link href="/">
+            <li className="text-white">Home</li>
+          </Link>
+          <GoChevronRight className="text-white text-lg font-bold"/>
+          <Link href="/dashboard/destinations">
+          <li className="text-lg font-bold text-cyan-600">
+            Destinations
+          </li>
+          </Link>
+        </ul>
+      </div>
       <div className="max-w-screen-xl mx-auto overflow-x-auto my-5 p-2">
         <table className="min-w-full divide-y divide-gray-200 rounded-lg shadow-lg">
           <thead className="bg-gradient-to-r from-cyan-600 to-purple-500 text-white">
