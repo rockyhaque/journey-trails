@@ -48,36 +48,35 @@ const FeaturedPlace = () => {
           ))}
         </div>
       ) : places?.length > 0 ? (
-        <div className="relative">
+        <div className="relative bg-gray-50 p-2 rounded-md">
           {/* Custom navigation buttons */}
-          <button className=""
+          <button className="max-sm:mt-52 md:top-1/2 md:-left-[2px]  xl:top-1/2 xl:-left-5"
             id="prev-button"
             style={{
               position: "absolute",
-              top: "50%",
+            
+             // Adjusted to keep the button inside the container
               transform: "translateY(-50%)",
               zIndex: 10,
               background: "#b7e2fc",
               color: "#00008B",
               border: "none",
-              borderRadius: "12px", // Rounded corners for a rectangular shape
-              width: "40px", // Wider box shape
+              borderRadius: "12px",
+              width: "40px", // Adjusted to match the previous button size
               height: "40px", // Adjusted height for the box
               cursor: "pointer",
               display: "flex",
               alignItems: "center", // Center content vertically
               justifyContent: "center", // Center content horizontally
-              fontSize: "16px", // Font size for content inside
+              fontSize: "16px", // Text/icon size adjustment
             }}
           >
             &lt;
           </button>
-          <button
+          <button className="max-sm:mt-52 max-sm:right-[10px] xl:top-1/2 xl:-right-5 md:top-1/2 md:-right-[2px] "
             id="next-button"
             style={{
-              position: "absolute",
-              top: "50%",
-              right: "10px", // Adjusted to keep the button inside the container
+              position: "absolute",   
               transform: "translateY(-50%)",
               zIndex: 10,
               background: "#b7e2fc",
@@ -95,10 +94,9 @@ const FeaturedPlace = () => {
           >
             &gt;
           </button>
-
           <Swiper
             modules={[Navigation]} // Use correct module import
-            spaceBetween={30}
+            spaceBetween={10}
             slidesPerView={1}
             navigation={{
               prevEl: "#prev-button", // Custom previous button
