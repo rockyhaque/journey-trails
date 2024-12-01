@@ -12,9 +12,10 @@ import {
 } from "react-icons/fa";
 import Link from "next/link";
 import Logo from "@/components/ui/Logo";
+import { usePathname } from "next/navigation";
 
 const Sidebar = () => {
-  const pathname = usePathname();
+  const pathname = usePathname() || "";
 
   return (
     <div className="flex flex-col h-screen bg-gray-800 text-white">
