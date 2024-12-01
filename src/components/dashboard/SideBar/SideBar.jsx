@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import logo from '../../../../public/assets/logo/logo.png'
+
 import {
   FaUser,
   FaPlus,
@@ -11,8 +11,7 @@ import {
   FaClipboardList,
 } from "react-icons/fa";
 import Link from "next/link";
-import { usePathname } from "next/navigation"; // App Router
-import Image from "next/image";
+import Logo from "@/components/ui/Logo";
 
 const Sidebar = () => {
   const pathname = usePathname();
@@ -20,30 +19,10 @@ const Sidebar = () => {
   return (
     <div className="flex flex-col h-screen bg-gray-800 text-white">
       <div className="p-4 text-2xl font-bold text-center border-b border-gray-700">
-        <Link
-          href="/"
-          className="flex-shrink-0 shimmer flex items-center gap-2 font-bold text-xl"
-        >
-          <Image
-            width={60}
-            height={60}
-            src={logo}
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            alt="Journey Trails logo"
-            className="h-8 w-auto"
-          />
-          <div className="bg-clip-text text-transparent bg-gradient-to-r from-blue-100 via-indigo-200 to-blue-300">
-            
-              <div>
-                <div>Journey Trails</div>
-                <div className="text-xs -mt-2">Let Your Journey With Us!</div>
-              </div>
-          
-          </div>
-        </Link>
+        <Logo />
       </div>
 
-      <nav className="flex-1 mt-4 space-y-2 px-2">
+      <nav className="flex-1 mt-4 space-y-2">
         <SidebarItem
           icon={<FaUser size={20} />}
           label="Profile"
@@ -62,7 +41,7 @@ const Sidebar = () => {
           href="/dashboard/destinations"
           isActive={pathname === "/dashboard/destinations"}
         />
-          <SidebarItem
+        <SidebarItem
           icon={<FaUser size={20} />}
           label="Manage Users"
           href="/dashboard/manage-users"
@@ -89,7 +68,9 @@ const Sidebar = () => {
       </nav>
 
       <div className="p-4 border-t border-gray-700">
-        <p className="text-sm text-center">© 2024 JourneyTrails</p>
+        <p className="text-sm text-center">
+          © {new Date().getFullYear()} JourneyTrails
+        </p>
       </div>
     </div>
   );
