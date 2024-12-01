@@ -40,6 +40,19 @@ const handler = NextAuth({
   ],
   pages: { signIn: "/login" },
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role || "tourist";
+        token.email = user.email;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      session.user.role = token.role;
+      session.user.email = token.email;
+      return session;
+    },
+
     async redirect({ url, baseUrl }) {
       return baseUrl;
     },
