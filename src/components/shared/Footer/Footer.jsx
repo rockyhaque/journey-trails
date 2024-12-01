@@ -10,6 +10,7 @@ import image1 from "../../../../public/assets/images/footer-icons/client-logo-1.
 import image2 from "../../../../public/assets/images/footer-icons/client-logo-2.png";
 import image3 from "../../../../public/assets/images/footer-icons/client-logo-3.png";
 import image4 from "../../../../public/assets/images/footer-icons/client-logo-4.png";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -25,7 +26,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h5 className="text-[#1dc5ce] text-lg md:text-xl font-semibold mb-3 text-center">
+            <h5 className="text-primary text-lg md:text-xl font-semibold mb-3 text-center">
               Subscribe Now
             </h5>
             <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-10 text-white text-center">
@@ -50,13 +51,14 @@ const Footer = () => {
           {/* footer main */}
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mt-20 text-white text-center sm:text-start">
             <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold mb-4 sm:mb-6 md:mb-8">
-                Adventor.
+              <h2 className="text-xl sm:text-2xl font-bold mb-4 sm:mb-6 md:mb-8">
+                Journey Trails
               </h2>
               <p className="mb-3 sm:mb-4 md:mb-6">
-                Going on an adventure is not about just fun, its all about
-                yourself and entertaining yourself. Get the best out adventure
-                activities in you and start living the moment.
+                Embark on an adventure with Journey Trails. It's not just about
+                fun—it's about discovering yourself through thrilling
+                experiences. Dive into exciting activities and live in the
+                moment like never before.
               </p>
               <div className="flex justify-center sm:justify-start gap-2">
                 <p className="bg-white p-2 md:p-3 rounded-full">
@@ -78,11 +80,21 @@ const Footer = () => {
                 Useful Links
               </h2>
               <ul className="mb-4 space-y-2">
-                <li>Home</li>
-                <li>About</li>
-                <li>Adventures</li>
-                <li>Blog</li>
-                <li>Contact</li>
+                <li>
+                  <Link href={"/"}>Home</Link>
+                </li>
+                <li>
+                  <Link href={"/about"}>About</Link>
+                </li>
+                <li>
+                  <Link href={"/contact"}>Contact</Link>
+                </li>
+                <li>
+                  <Link href={"/destinations"}>Destinations</Link>
+                </li>
+                <li>
+                  <Link href={"/login"}>Signin</Link>
+                </li>
               </ul>
             </div>
             <div>
@@ -108,7 +120,7 @@ const Footer = () => {
                 </li>
                 <li className="flex justify-center sm:justify-start items-start gap-1.5">
                   <MdEmail />
-                  <span className="-mt-1">example@gmail.com</span>
+                  <span className="-mt-1">journey.trails@gmail.com</span>
                 </li>
                 <li className="flex justify-center sm:justify-start items-start gap-1">
                   <FaPhone />
@@ -124,7 +136,7 @@ const Footer = () => {
               <p className="border border-dashed border-[#527969] w-full mb-5"></p>
               <div className="sm:flex justify-between text-sm sm:text-base">
                 <p className="text-center sm:text-start">
-                  © 2021 Adventor. Created by Designthemes
+                  © {new Date().getFullYear()} Created by Journey Trails
                 </p>
                 <p className="flex items-center justify-center sm:justify-start gap-3 sm:gap-5 mt-1 sm:mt-0">
                   <span>Help</span>
