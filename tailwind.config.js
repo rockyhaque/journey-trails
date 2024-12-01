@@ -14,6 +14,9 @@ module.exports = {
       backgroundImage: {
         "hero-pattern": "url('/assets/footer-bg.jpg')",
       },
+      boxShadow: {
+        "bottom-shadow": "0px 1px 2px rgba(0, 0, 0, 0.1)",
+      },
     },
   },
   plugins: [require("daisyui")],
