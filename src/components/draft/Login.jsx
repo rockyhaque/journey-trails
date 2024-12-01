@@ -21,9 +21,9 @@ const Login = () => {
       <div className="w-full max-w-screen-xl mx-auto flex items-center justify-between px-5">
         {/* Left Content */}
         <div className="w-full md:w-1/2 flex justify-center">
-          <div className="w-full sm:w-96 mx-auto px-5 py-10 rounded backdrop-blur-sm shadow md:shadow-none border border-black/15 md:border-none">
+          <div className="w-full sm:w-96 mx-auto px-5 py-6 md:py-10 rounded backdrop-blur-sm shadow md:shadow-none border border-black/15 md:border-none">
             <h4 className="text-gray-700 mb-2">Start your journey</h4>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-black mb-16">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-black mb-10 md:mb-16">
               Signin to InsideBox
             </h2>
             <form>
@@ -54,7 +54,7 @@ const Login = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  class="block w-full px-4 py-2.5 text-gray-700 border border-gray-700 rounded placeholder:text-xs focus:border-white focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-40 focus:placeholder:text-transparent"
+                  className="block w-full px-4 py-2.5 text-gray-700 border border-gray-700 rounded placeholder:text-xs focus:border-white focus:outline-none focus:ring focus:ring-primary focus:ring-opacity-40 focus:placeholder:text-transparent"
                   placeholder="Password"
                 />
                 <span
@@ -62,9 +62,9 @@ const Login = () => {
                   className="absolute inset-y-0 right-0 top-1 flex items-center pr-4 cursor-pointer text-black"
                 >
                   {showPassword ? (
-                    <AiFillEye size={14} />
+                    <AiFillEye size={14} className="text-gray-700" />
                   ) : (
-                    <AiFillEyeInvisible size={14} />
+                    <AiFillEyeInvisible size={14} className="text-gray-700" />
                   )}
                 </span>
               </div>
