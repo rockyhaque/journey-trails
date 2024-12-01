@@ -7,6 +7,7 @@ import { Pagination, Navigation, Autoplay } from "swiper/modules";
 import Image from "next/image";
 import backgroundImage from "../../../../public/assets/images/testimonialBG.png";
 import React from "react";
+import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 
 const testimonials = [
   {
@@ -42,12 +43,7 @@ const Testimonial = () => {
       }}
     >
       <div className="max-w-screen-xl mx-auto relative py-10">
-        <h2 className="text-base text-cyan-500 italic text-center mb-2">
-          Client Testimonial
-        </h2>
-        <p className="text-3xl text-center font-semibold mb-10 md:mb-20">
-          Savoring your Taste Buds
-        </p>
+        <SectionHeading title="Client Testimonial" description="Client testimonials are concise, impactful statements showcasing positive experiences and satisfaction with our services, highlighting trust and quality" />
         <Swiper
           modules={[Pagination, Navigation, Autoplay]}
           spaceBetween={50}

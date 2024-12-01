@@ -5,19 +5,16 @@ import { RiDeleteBin6Line } from "react-icons/ri";
 const MyBookingsPage = () => {
   return (
     <div>
-      <SectionHeading
-        title="My Bookings"
-        description="Check your bookings"
-      ></SectionHeading>
+      <SectionHeading title="My Bookings"></SectionHeading>
       <div className="max-w-screen-xl mx-auto overflow-x-auto my-5">
         <table className="min-w-full divide-y divide-gray-200 rounded-lg shadow-lg">
           <thead className="bg-gradient-to-r from-cyan-600 to-purple-500 text-white">
             <tr>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
-                Profile
+                Image
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
-                Username
+                Name
               </th>
 
               <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">
