@@ -5,7 +5,7 @@ export default function FeaturedPlaceCards({ travelInfo }) {
 
 
   return (
-    <div className="max-w-sm h-[600px] overflow-hidden group border p-3 rounded-lg bg-gradient-to-r from-neutral-50 to-sky-50">
+    <div className="h-[600px] overflow-hidden group border p-5 rounded-lg bg-gradient-to-r from-neutral-50 to-sky-50 shadow-lg">
       {/* Image Section with Discount Badge */}
       <div className="relative">
         <Image

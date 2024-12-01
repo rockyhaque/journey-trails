@@ -23,7 +23,7 @@ const MobileSideBar = () => {
   return (
     <div>
       <div className="">
-        <div className="  gap-5 lg:gap-10 justify-center items-center">
+        <div className=" gap-5 lg:gap-10 justify-center items-center">
           {/* Burger Icon */}
           <div onClick={handleClick}>
             {click ? (
@@ -70,7 +70,7 @@ const MobileSideBar = () => {
 
           {/* Scrollable Content with Hidden Scrollbar */}
           <ul
-            className="overflow-y-scroll p-4 space-y-4 text-center text-3xl bg-base-200 "
+            className="overflow-y-scroll p-4 space-y-4 text-center text-3xl bg-base-200 min-h-screen"
             style={{
               maxHeight: "calc(100vh - 64px)",
               scrollbarWidth: "none" /* For Firefox */,
