@@ -1,28 +1,24 @@
 import React from "react";
 import {
-  FaHome,
   FaUser,
-  FaCog,
   FaPlus,
   FaListAlt,
   FaTicketAlt,
   FaHeart,
   FaClipboardList,
-  FaUserCircle,
 } from "react-icons/fa";
 import Link from "next/link";
+import Logo from "@/components/ui/Logo";
 
 const Sidebar = () => {
   return (
     <div className="flex flex-col h-screen bg-gray-800 text-white">
       <div className="p-4 text-2xl font-bold text-center border-b border-gray-700">
-        <Link href="/" className="text-blue-500">
-          JourneyTrails
-        </Link>
+        <Logo />
       </div>
 
       <nav className="flex-1 mt-4 space-y-2">
-      <SidebarItem
+        <SidebarItem
           icon={<FaUser size={20} />}
           label="Profile"
           href="/dashboard/profile"
@@ -60,7 +56,9 @@ const Sidebar = () => {
       </nav>
 
       <div className="p-4 border-t border-gray-700">
-        <p className="text-sm text-center">© 2024 JourneyTrails</p>
+        <p className="text-sm text-center">
+          © {new Date().getFullYear()} JourneyTrails
+        </p>
       </div>
     </div>
   );

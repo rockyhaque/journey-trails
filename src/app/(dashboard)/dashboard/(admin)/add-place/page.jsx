@@ -28,7 +28,7 @@ const AddPlacePage = () => {
     <div>
       <SectionHeading
         title="Add Place for Admin"
-        description="lorem vai kemon asen"
+        description="Added places where people want to go!!"
       />
 
       <div>
@@ -207,12 +207,11 @@ const AddPlacePage = () => {
             </div>
 
             <div className="flex justify-center mt-6">
-              {/* <CustomBtn
+              <CustomBtn
                 type="submit"
                 text="Added Place"
                 customClass="w-full md:w-2/6"
-              /> */}
-              <button type="submit bg-green-500 py-5 px-10">Added</button>
+              />
             </div>
           </form>
         </Container>
