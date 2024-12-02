@@ -77,7 +77,7 @@ const MyBookingsPage = () => {
 
   return (
     <div>
-       <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600">
+      <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600">
         <ul className="px-5">
           <Link href="/">
             <li className="text-white">Home</li>
@@ -134,7 +134,7 @@ const MyBookingsPage = () => {
                         width={40}
                         height={40}
                         className="h-10 w-10 rounded-full"
-                        src={booking.placeImage || null}
+                        src={booking?.image || null}
                         alt={booking.title || "Booking Image"}
                       />
                     </td>
