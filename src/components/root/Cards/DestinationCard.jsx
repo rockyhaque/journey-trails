@@ -17,7 +17,7 @@ export default function DestinationCard({ travelInfo }) {
         />
         {travelInfo?.discount && (
           <div className="absolute top-3 left-3 bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-900 text-white rounded-lg px-2 py-1">
-            <p className="">{travelInfo?.discount}% OFF</p>
+            <p className="">{travelInfo?.discount}5% OFF</p>
           </div>
         )}
       </div>
