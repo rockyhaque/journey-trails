@@ -142,7 +142,7 @@ const MyBookingsPage = () => {
                       {booking.name}
                     </td>
                     <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                      {booking.placeName || "Unknown Location"}
+                      {booking.title}
                     </td>
                     <td className="px-6 py-4 text-sm text-gray-500">
                       {new Date(booking.bookingDate).toLocaleDateString() ||
