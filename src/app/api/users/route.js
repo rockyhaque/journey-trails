@@ -14,9 +14,7 @@ export const POST = async (request) => {
         { status: 409 }
       );
     }
-    const res = await userCollection.insertOne({
-      ...newUser,
-    });
+    await userCollection.insertOne({ ...newUser });
     return NextResponse.json({ message: "User Created" }, { status: 200 });
   } catch (err) {
     return NextResponse.json(

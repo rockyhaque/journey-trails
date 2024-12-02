@@ -1,8 +1,78 @@
+"use client";
+
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
+import Spinner from "@/components/shared/Spinner/Spinner";
+import axios from "axios";
+import { useSession } from "next-auth/react";
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 const MyBookingsPage = () => {
+  const [bookings, setbookings] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const { data: session, status } = useSession();
+  const userEmail = session?.user?.email;
+
+  useEffect(() => {
+    if (userEmail) {
+      const fetchBookings = async () => {
+        try {
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_URL}/api/all-bookings/${userEmail}`
+          );
+          setbookings(response.data || []);
+          setLoading(false);
+        } catch (err) {
+          setError(err.message);
+          setLoading(false);
+        }
+      };
+      fetchBookings();
+    }
+  }, [userEmail]);
+
+  const handleDelete = async (bookingId) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (result.isConfirmed) {
+        const response = await axios.delete(`/api/all-bookings/${bookingId}`);
+        if (response.status === 200) {
+          Swal.fire("Deleted!", "Your booking has been deleted.", "success");
+        } else {
+          Swal.fire(
+            "Failed!",
+            "Failed to delete booking. Please try again.",
+            "error"
+          );
+        }
+      }
+    } catch (err) {
+      console.error("Error deleting booking:", err);
+      Swal.fire(
+        "Error!",
+        "An error occurred while deleting the booking.",
+        "error"
+      );
+    }
+  };
+  if (status === "loading") {
+    return <Spinner />;
+  }
+  if (loading) return <Spinner />;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <div>
       <SectionHeading title="My Bookings"></SectionHeading>
@@ -38,64 +108,61 @@ const MyBookingsPage = () => {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            <tr className="hover:bg-cyan-50 hover:scale-95 hover:shadow-xl transform transition-all duration-300">
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Image
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 rounded-full"
-                  src="https://i.ibb.co.com/FbJwfGM/caption.jpg"
-                  alt="Jane Cooper"
-                />
-              </td>
-              <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                Jane Cooper
-              </td>
-
-              <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                Santorini, Greece
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-500">2024-12-15</td>
-              <td className="px-6 py-4 text-sm text-gray-500">2025-01-10</td>
-              <td className="px-6 py-4 text-sm font-medium text-green-600">
-                Confirmed
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-500">$2000</td>
-              <td className="px-6 py-4 text-sm font-medium">
-                <button className="ml-3 text-red-600 hover:text-red-800 font-bold">
-                  <RiDeleteBin6Line className="text-2xl" />
-                </button>
-              </td>
-            </tr>
-            <tr className="hover:bg-cyan-50 hover:scale-95 hover:shadow-xl transform transition-all duration-300">
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Image
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 rounded-full"
-                  src="https://i.ibb.co.com/x56CfCR/paris-france-gallery-2.jpg"
-                  alt="John Doe"
-                />
-              </td>
-              <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                John Doe
-              </td>
-
-              <td className="px-6 py-4 text-sm font-medium text-gray-900">
-                Paris, France
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-500">2024-11-20</td>
-              <td className="px-6 py-4 text-sm text-gray-500">2024-12-05</td>
-              <td className="px-6 py-4 text-sm font-medium text-yellow-600">
-                Pending
-              </td>
-              <td className="px-6 py-4 text-sm text-gray-500">$1500</td>
-              <td className="px-6 py-4 text-sm font-medium">
-                <button className="ml-3 text-red-600 hover:text-red-800 font-bold">
-                  <RiDeleteBin6Line className="text-2xl" />
-                </button>
-              </td>
-            </tr>
+            {bookings.filter((booking) => booking.status === "booked").length >
+            0 ? (
+              bookings
+                .filter((booking) => booking.status === "booked")
+                .map((booking) => (
+                  <tr
+                    key={booking._id}
+                    className="hover:bg-cyan-50 hover:scale-95 hover:shadow-xl transform transition-all duration-300"
+                  >
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <Image
+                        width={40}
+                        height={40}
+                        className="h-10 w-10 rounded-full"
+                        src={booking.placeImage || null}
+                        alt={booking.title || "Booking Image"}
+                      />
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                      {booking.name}
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium text-gray-900">
+                      {booking.placeName || "Unknown Location"}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {new Date(booking.bookingDate).toLocaleDateString() ||
+                        "N/A"}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      {new Date(booking.travelDate).toLocaleDateString() ||
+                        "N/A"}
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium text-yellow-600">
+                      {booking.status}
+                    </td>
+                    <td className="px-6 py-4 text-sm text-gray-500">
+                      ${booking.price || "N/A"}
+                    </td>
+                    <td className="px-6 py-4 text-sm font-medium">
+                      <button
+                        onClick={() => handleDelete(booking._id)}
+                        className="ml-3 text-red-600 hover:text-red-800 font-bold"
+                      >
+                        <RiDeleteBin6Line className="text-2xl" />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+            ) : (
+              <tr>
+                <td colSpan="8" className="text-center py-6 text-gray-500">
+                  No booked bookings available.
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       </div>

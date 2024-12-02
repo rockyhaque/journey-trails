@@ -1,10 +1,80 @@
+"use client";
+
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { MdEditLocationAlt } from "react-icons/md";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { BiDetail } from "react-icons/bi";
+import axios from "axios";
+import Spinner from "@/components/shared/Spinner/Spinner";
+import Swal from "sweetalert2";
+import { useRouter } from "next/navigation";
 const DestinationsPage = () => {
+  const [destinations, setDestinations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_URL}/api/all-places`
+        );
+        setDestinations(response.data.places || []);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+    fetchDestinations();
+  }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      const result = await Swal.fire({
+        title: "Are you sure?",
+        text: "This action cannot be undone!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      });
+
+      if (result.isConfirmed) {
+        const response = await axios.delete(
+          `${process.env.NEXT_PUBLIC_URL}/api/all-places/${id}`
+        );
+
+        if (response.status === 200) {
+          setDestinations((prevDestinations) =>
+            prevDestinations.filter((destination) => destination._id !== id)
+          );
+          Swal.fire("Deleted!", "The destination has been deleted.", "success");
+        } else {
+          Swal.fire("Failed!", "Failed to delete destination.", "error");
+        }
+      }
+    } catch (err) {
+      console.error("Error deleting destination:", err);
+      Swal.fire(
+        "Error!",
+        "An error occurred while deleting the destination.",
+        "error"
+      );
+    }
+  };
+
+  const handleDetailsClick = (destinationId) => {
+    router.push(`/destinations/${destinationId}`); // Redirect to the dynamic details page
+  };
+
+  if (loading) return <Spinner />;
+  if (error) return <p>Error: {error}</p>;
+
   return (
     <div>
       <SectionHeading
@@ -55,48 +125,54 @@ const DestinationsPage = () => {
             </tr>
           </thead>
           <tbody className="bg-white  divide-y divide-gray-200 space-y-10">
-            <tr className="hover:bg-cyan-50 hover:scale-95 hover:shadow-xl transform transition-all duration-300">
-              <td className="px-6 py-4 whitespace-nowrap">
-                <Image
-                  width={40}
-                  height={40}
-                  className="h-10 w-10 rounded-full"
-                  src="https://i.ibb.co.com/xC7RTSS/Pexels-Photo-by-Bruno-Palace.jpg"
-                  alt="John Doe"
-                />
-              </td>
-
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                sent martin
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                1500 $
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <button
-                  data-tip="Details"
-                  className="text-cyan-600 hover:text-red-800 font-bold tooltip tooltip-info"
-                >
-                  <BiDetail className="text-2xl" />
-                </button>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <button
-                  data-tip="Update"
-                  className="text-green-600 hover:text-red-800 font-bold tooltip tooltip-success"
-                >
-                  <MdEditLocationAlt className="text-2xl" />
-                </button>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                <button
-                  data-tip="Delete"
-                  className="text-red-600 hover:text-red-800 font-bold tooltip tooltip-error"
-                >
-                  <RiDeleteBin6Line className="text-2xl" />
-                </button>
-              </td>
-            </tr>
+            {destinations.map((destination) => (
+              <tr
+                key={destination._id}
+                className="hover:bg-cyan-50 hover:scale-95 hover:shadow-xl transform transition-all duration-300"
+              >
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <Image
+                    width={40}
+                    height={40}
+                    className="h-10 w-10 rounded-full"
+                    src={destination.coverImg}
+                    alt={destination.title}
+                  />
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  {destination.title}
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                  {destination.amount} $
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button
+                    onClick={() => handleDetailsClick(destination._id)}
+                    data-tip="Details"
+                    className="text-cyan-600 hover:text-red-800 font-bold tooltip tooltip-info"
+                  >
+                    <BiDetail className="text-2xl" />
+                  </button>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button
+                    data-tip="Update"
+                    className="text-green-600 hover:text-red-800 font-bold tooltip tooltip-success"
+                  >
+                    <MdEditLocationAlt className="text-2xl" />
+                  </button>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button
+                    onClick={() => handleDelete(destination._id)}
+                    data-tip="Delete"
+                    className="text-red-600 hover:text-red-800 font-bold tooltip tooltip-error"
+                  >
+                    <RiDeleteBin6Line className="text-2xl" />
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>

@@ -42,11 +42,11 @@ const DestinationDetailsSinglePage = () => {
 
   return (
     <div className="max-w-screen-lg mx-auto py-12">
-      <SectionHeading title={place.name || "Destination Details"} />
+      <SectionHeading title={place.location || "Destination Details"} />
       <div className="flex flex-col lg:flex-row gap-6">
         <div className="relative w-full lg:w-1/2 h-64 lg:h-96">
           <Image
-            src={place.coverImg}
+            src={place.coverImg || null}
             alt={place.title}
             layout="fill"
             objectFit="cover"
@@ -63,6 +63,8 @@ const DestinationDetailsSinglePage = () => {
             <span className="font-semibold">People Count Range:</span>
             {place.peopleCountRange}
           </p>
+          <button className="btn"> book </button>
+          <button className="btn"> wish </button>
         </div>
       </div>
     </div>
