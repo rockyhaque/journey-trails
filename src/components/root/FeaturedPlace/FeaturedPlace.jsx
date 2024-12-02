@@ -15,7 +15,9 @@ const FeaturedPlace = () => {
 
   const loadData = async () => {
     try {
-      const { data } = await axios.get(`${process.env.NEXT_PUBLIC_URL}/api/all-places`);
+      const { data } = await axios.get(
+        `${process.env.NEXT_PUBLIC_URL}/api/all-places`
+      );
       const featuredPlaces = data.places.filter((place) => place.isFeatured);
       setPlaces(featuredPlaces);
     } catch (error) {
@@ -50,12 +52,13 @@ const FeaturedPlace = () => {
       ) : places?.length > 0 ? (
         <div className="relative bg-gray-50 p-2 rounded-md">
           {/* Custom navigation buttons */}
-          <button className="max-sm:mt-52 md:top-1/2 md:-left-[2px]  xl:top-1/2 xl:-left-5"
+          <button
+            className="max-sm:mt-52 md:top-1/2 md:-left-[2px]  xl:top-1/2 xl:-left-5"
             id="prev-button"
             style={{
               position: "absolute",
-            
-             // Adjusted to keep the button inside the container
+
+              // Adjusted to keep the button inside the container
               transform: "translateY(-50%)",
               zIndex: 10,
               background: "#b7e2fc",
@@ -73,10 +76,11 @@ const FeaturedPlace = () => {
           >
             &lt;
           </button>
-          <button className="max-sm:mt-52 max-sm:right-[10px] xl:top-1/2 xl:-right-5 md:top-1/2 md:-right-[2px] "
+          <button
+            className="max-sm:mt-52 max-sm:right-[10px] xl:top-1/2 xl:-right-5 md:top-1/2 md:-right-[2px] "
             id="next-button"
             style={{
-              position: "absolute",   
+              position: "absolute",
               transform: "translateY(-50%)",
               zIndex: 10,
               background: "#b7e2fc",
