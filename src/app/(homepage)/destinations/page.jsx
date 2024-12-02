@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
-import Image from "next/image";
 import DestinationCard from "@/components/root/Cards/DestinationCard";
 
 const DestinationPage = () => {
@@ -32,7 +31,6 @@ const DestinationPage = () => {
       <SectionHeading title="All Destination" />
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {loading ? (
-          // Render skeleton placeholders while loading
           Array.from({ length: 3 }).map((_, index) => (
             <div key={index} className="flex w-52 flex-col gap-4">
               <div className="skeleton h-32 w-full bg-gray-300 rounded-md animate-pulse"></div>
@@ -42,7 +40,6 @@ const DestinationPage = () => {
             </div>
           ))
         ) : places?.length > 0 ? (
-          // Render actual data once loaded
           places.map((place) => (
             <DestinationCard key={place._id} travelInfo={place} />
           ))

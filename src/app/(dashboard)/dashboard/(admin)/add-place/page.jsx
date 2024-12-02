@@ -1,13 +1,13 @@
 "use client";
-import CustomBtn from "@/components/shared/Button/CustomBtn";
+// import CustomBtn from "@/components/shared/Button/CustomBtn";
 import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import Container from "@/components/ui/Container";
 import React from "react";
+import Swal from "sweetalert2";
 
 const AddPlacePage = () => {
-  const handleAddPlace = (event) => {
+  const handleAddPlace = async (event) => {
     event.preventDefault();
-
     const addedPlace = {
       title: event.target.title.value,
       coverImage: event.target.coverImage.value,
@@ -21,7 +21,40 @@ const AddPlacePage = () => {
       description: event.target.description.value,
     };
 
-    console.log(addedPlace);
+    try {
+      const response = await fetch("/api/all-places", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(addedPlace),
+      });
+
+      if (response.ok) {
+        Swal.fire({
+          title: "Success!",
+          text: "Place added successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        event.target.reset();
+      } else {
+        Swal.fire({
+          title: "Error!",
+          text: "Failed to add place.",
+          icon: "error",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      Swal.fire({
+        title: "Error!",
+        text: "An error occurred while adding the place.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
   };
 
   return (
@@ -207,11 +240,14 @@ const AddPlacePage = () => {
             </div>
 
             <div className="flex justify-center mt-6">
-              <CustomBtn
+              {/* <CustomBtn
                 type="submit"
                 text="Added Place"
                 customClass="w-full md:w-2/6"
-              />
+              /> */}
+              <button type="submit" className="btn">
+                Submit
+              </button>
             </div>
           </form>
         </Container>
