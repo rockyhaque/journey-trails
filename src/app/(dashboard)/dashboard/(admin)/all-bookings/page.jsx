@@ -79,7 +79,7 @@ const AllBookingsPage = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto">
-        <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600">
+      <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600">
         <ul className="px-5">
           <Link href="/">
             <li className=" text-white">Home</li>
@@ -98,7 +98,7 @@ const AllBookingsPage = () => {
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
               >
-               Image
+                Image
               </th>
               <th
                 scope="col"
@@ -154,7 +154,7 @@ const AllBookingsPage = () => {
                   />
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                  {booking.placeName}
+                  {booking.title}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
                   $ {booking.price}
