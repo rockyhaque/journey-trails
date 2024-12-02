@@ -5,7 +5,9 @@ import Spinner from "@/components/shared/Spinner/Spinner";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { GoChevronRight } from "react-icons/go";
 import Swal from "sweetalert2";
 
 const AllBookingsPage = () => {
@@ -77,7 +79,17 @@ const AllBookingsPage = () => {
 
   return (
     <div className="max-w-screen-xl mx-auto">
-      <SectionHeading title={"All Bookings place"} />
+        <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600">
+        <ul className="px-5">
+          <Link href="/">
+            <li className=" text-white">Home</li>
+          </Link>
+          <GoChevronRight className="text-lg font-bold text-white" />
+          <Link href="/dashboard/manage-users">
+            <li className="text-lg font-bold text-cyan-600">All Bookings</li>
+          </Link>
+        </ul>
+      </div>
       <div className=" overflow-x-auto my-5">
         <table className="min-w-full divide-y divide-gray-200 rounded-lg shadow-lg">
           <thead className="bg-gradient-to-r from-cyan-600 to-purple-500 text-white">
@@ -86,7 +98,7 @@ const AllBookingsPage = () => {
                 scope="col"
                 className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
               >
-                Place Image
+               Image
               </th>
               <th
                 scope="col"

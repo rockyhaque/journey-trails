@@ -5,7 +5,9 @@ import Spinner from "@/components/shared/Spinner/Spinner";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { GoChevronRight } from "react-icons/go";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from "sweetalert2";
 
@@ -75,7 +77,17 @@ const MyBookingsPage = () => {
 
   return (
     <div>
-      <SectionHeading title="My Bookings"></SectionHeading>
+       <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600">
+        <ul className="px-5">
+          <Link href="/">
+            <li className="text-white">Home</li>
+          </Link>
+          <GoChevronRight className="text-lg font-bold text-white" />
+          <Link href="/dashboard/my-bookings">
+            <li className="text-lg font-bold text-cyan-600">My Bookings</li>
+          </Link>
+        </ul>
+      </div>
       <div className="max-w-screen-xl mx-auto overflow-x-auto my-5">
         <table className="min-w-full divide-y divide-gray-200 rounded-lg shadow-lg">
           <thead className="bg-gradient-to-r from-cyan-600 to-purple-500 text-white">
