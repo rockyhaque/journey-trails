@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function DestinationCard({ travelInfo }) {
   return (
-    <div className="max-w-screen-xl overflow-hidden group border p-3 rounded-lg bg-gradient-to-r from-neutral-50 to-sky-50">
+    <div className="max-w-screen-xl overflow-hidden group border p-3 rounded-lg bg-gradient-to-r from-neutral-50 to-sky-50 flex flex-col">
       {/* Image Section with Discount Badge */}
       <div className="relative">
         <Image
@@ -25,9 +25,7 @@ export default function DestinationCard({ travelInfo }) {
       {/* Header Section */}
       <div className="ml-2 mt-3 space-y-1">
         <h3 className="text-xl font-semibold">{travelInfo?.title}</h3>
-        <p className="text-sm text-muted-foreground">
-          {travelInfo?.description}
-        </p>
+        <p className="text-sm text-muted-foreground">{travelInfo?.description}</p>
       </div>
 
       {/* Content Section */}
@@ -42,7 +40,7 @@ export default function DestinationCard({ travelInfo }) {
           {/* Duration */}
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
             <Clock className="w-4 h-4" />
-            <span>{travelInfo.days} Days</span>
+            <span>{travelInfo?.days} Days</span>
           </div>
 
           {/* People Count */}
@@ -64,12 +62,12 @@ export default function DestinationCard({ travelInfo }) {
         </div>
       </div>
 
-      {/* button section */}
-      <div className="flex justify-center items-center mt-4 w-full">
+      {/* Button Section */}
+      <div className="mt-auto flex justify-center items-center w-full">
         <Link href={`/destinations/${travelInfo?._id}`} className="w-2/3">
           <CustomBtn text="Details" customClass="w-full" />
         </Link>
       </div>
     </div>
   );
-}
+} 
