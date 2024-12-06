@@ -1,10 +1,11 @@
-import { connectDB } from "@/lib/connectDB";
+import connectDB from "@/lib/connectDB";
+import AllPlaces from "@/models/AllPlaces";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 //? SINGLE PLACE LOAD
 export const GET = async (req, { params }) => {
-  const { id } = params;
+  const { id } = await params;
   try {
     if (!ObjectId.isValid(id)) {
       return NextResponse.json(
@@ -12,13 +13,12 @@ export const GET = async (req, { params }) => {
         { status: 400 }
       );
     }
-    const db = await connectDB();
-    const placesCollection = db.collection("all-places");
-    const place = await placesCollection.findOne({ _id: new ObjectId(id) });
+    await connectDB();
+    const place = await AllPlaces.findById(id);
     if (!place) {
       return NextResponse.json({ message: "Place not found" }, { status: 404 });
     }
-    return NextResponse.json(place, { status: 200 });
+    return NextResponse.json(place, { status: 200, place: place });
   } catch (error) {
     console.error("Error in GET /api/all-places/[id]:", error);
     return NextResponse.json({ message: "Place not found" }, { status: 500 });
@@ -27,20 +27,18 @@ export const GET = async (req, { params }) => {
 
 //? UPDATE PLACES DATA
 export const PUT = async (req, { params }) => {
-  const { id } = params;
+  const { id } = await params;
   const updates = await req.json();
   try {
-    const db = await connectDB();
-    const placesCollection = db.collection("all-places");
-    const result = await placesCollection.updateOne(
-      { _id: new ObjectId(id) },
-      { $set: updates }
-    );
-    if (result.matchedCount === 0) {
+    await connectDB();
+    const updatedPlace = await AllPlaces.findByIdAndUpdate(id, updates, {
+      new: true,
+    });
+    if (!updatedPlace) {
       return NextResponse.json({ message: "Place not found" }, { status: 404 });
     }
     return NextResponse.json(
-      { message: "Place updated successfully" },
+      { message: "Place updated successfully", place: updatedPlace },
       { status: 200 }
     );
   } catch (error) {
@@ -54,16 +52,15 @@ export const PUT = async (req, { params }) => {
 
 //? DELETE SINGLE PLACES
 export const DELETE = async (req, { params }) => {
-  const { id } = params;
+  const { id } = await params;
   try {
-    const db = await connectDB();
-    const placesCollection = db.collection("all-places");
-    const result = await placesCollection.deleteOne({ _id: new ObjectId(id) });
-    if (result.deletedCount === 0) {
+    await connectDB();
+    const deletedPlace = await AllPlaces.findByIdAndDelete(id);
+    if (!deletedPlace) {
       return NextResponse.json({ message: "Place not found" }, { status: 404 });
     }
     return NextResponse.json(
-      { message: "Place deleted successfully" },
+      { message: "Place deleted successfully", success: true },
       { status: 200 }
     );
   } catch (error) {

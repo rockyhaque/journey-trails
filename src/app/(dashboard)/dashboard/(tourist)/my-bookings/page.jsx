@@ -1,6 +1,5 @@
 "use client";
 
-import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import Spinner from "@/components/shared/Spinner/Spinner";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -26,6 +25,7 @@ const MyBookingsPage = () => {
             `${process.env.NEXT_PUBLIC_URL}/api/all-bookings/${userEmail}`
           );
           setbookings(response.data || []);
+          console.log(response);
           setLoading(false);
         } catch (err) {
           setError(err.message);
@@ -51,6 +51,9 @@ const MyBookingsPage = () => {
       if (result.isConfirmed) {
         const response = await axios.delete(`/api/all-bookings/${bookingId}`);
         if (response.status === 200) {
+          setbookings((prevBookings) =>
+            prevBookings.filter((booking) => booking._id !== bookingId)
+          );
           Swal.fire("Deleted!", "Your booking has been deleted.", "success");
         } else {
           Swal.fire(

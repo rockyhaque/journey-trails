@@ -1,14 +1,14 @@
-import { connectDB } from "@/lib/connectDB";
+import connectDB from "@/lib/connectDB";
+import AllBookings from "@/models/AllBookings";
 import { ObjectId } from "mongodb";
 import { NextResponse } from "next/server";
 
 //? GET Request: Get bookings by email
 export const GET = async (req, { params }) => {
-  const { param } = params;
+  const { param } = await params;
   try {
-    const db = await connectDB();
-    const bookingsCollection = db.collection("all-bookings");
-    const bookings = await bookingsCollection.find({ email: param }).toArray();
+    await connectDB();
+    const bookings = await AllBookings.find({ email: param });
     if (bookings.length === 0) {
       return NextResponse.json(
         { message: "No bookings found for this email" },
@@ -29,17 +29,8 @@ export const GET = async (req, { params }) => {
 export const DELETE = async (req, { params }) => {
   const { param } = params;
   try {
-    const db = await connectDB();
-    const bookingsCollection = db.collection("all-bookings");
-    if (!ObjectId.isValid(param)) {
-      return NextResponse.json(
-        { message: "Invalid booking ID format" },
-        { status: 400 }
-      );
-    }
-    const result = await bookingsCollection.deleteOne({
-      _id: new ObjectId(param),
-    });
+    await connectDB();
+    const result = await AllBookings.deleteOne({ _id: param });
     if (result.deletedCount === 0) {
       return NextResponse.json(
         { message: "Booking not found" },

@@ -1,20 +1,20 @@
+"use client";
+
 import React from "react";
-import {
-  FaMapMarkerAlt,
-  FaPlane,
-  FaHeart,
-  FaCalendarAlt,
-} from "react-icons/fa";
+import { FaPlane, FaHeart, FaCalendarAlt } from "react-icons/fa";
 import Image from "next/image";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const ProfilePage = () => {
+  const { data: session } = useSession();
+  const role = session?.user?.role.toUpperCase();
   return (
-    <div className="flex justify-center items-center w-full h-full bg-gradient-to-br from-black via-cyan-600 to-blue-950 text-white ">
-      <div className="bg-gradient-to-br from-black via-cyan-600 to-blue-950 text-white p-6 rounded-lg w-full max-w-4xl mx-auto shadow-xl py-20">
+    <div className=" bg-gradient-to-br from-black via-cyan-600 to-blue-950 text-white p-10 h-full">
+      <div className="bg-gradient-to-br from-black via-cyan-600 to-blue-950 text-white  rounded-lg w-full max-w-4xl mx-auto shadow-xl p-10">
         {/* Header Section */}
         <div className="flex justify-between items-center border-b border-gray-200 pb-4">
-          <h1 className="text-3xl font-bold">Tourist Profile / Admin Page</h1>
+          <h1 className="text-3xl font-bold">{session?.user?.name} Profile</h1>
         </div>
 
         {/* Profile Section */}
@@ -22,18 +22,14 @@ const ProfilePage = () => {
           <Image
             width={96}
             height={96}
-            src="https://i.ibb.co.com/yPmmNyF/rakibul-haq-roky.jpg"
+            src={session?.user?.image}
             alt="User"
             className="w-24 h-24 rounded-full border-4 border-cyan-500 shadow-md mx-auto md:mx-0"
           />
           <div className="ml-6 mt-4 md:mt-0 text-center md:text-left">
-            <h2 className="text-2xl font-bold">Rocky Haque</h2>
-            <p className="text-gray-400 italic">rocky@gmail.com</p>
-            <p className="text-gray-400 italic">Tourist</p>
-            <p className="text-gray-400 flex justify-center md:justify-start items-center">
-              <FaMapMarkerAlt className="mr-2 text-green-400" />
-              New York, USA
-            </p>
+            <h2 className="text-2xl font-bold">{session?.user?.name}</h2>
+            <p className="text-gray-400 italic">{session?.user?.email}</p>
+            <p className="text-purple-400 font-thin text-sm">{role}</p>
           </div>
         </div>
 

@@ -1,6 +1,5 @@
 "use client";
 
-import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { MdEditLocationAlt } from "react-icons/md";
@@ -71,7 +70,7 @@ const DestinationsPage = () => {
   };
 
   const handleDetailsClick = (destinationId) => {
-    router.push(`/destinations/${destinationId}`); // Redirect to the dynamic details page
+    router.push(`/destinations/${destinationId}`);
   };
 
   if (loading) return <Spinner />;
@@ -79,7 +78,7 @@ const DestinationsPage = () => {
 
   return (
     <div>
-   <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600">
+      <div className="breadcrumbs h-[70px] text-sm bg-gray-800 backdrop-blur-lg  py-5 sticky top-0 shadow-bottom-shadow z-40 border border-gray-600">
         <ul className="px-5">
           <Link href="/">
             <li className="text-white">Home</li>

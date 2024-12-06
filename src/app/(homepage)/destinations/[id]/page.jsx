@@ -37,16 +37,16 @@ const DestinationDetailsSinglePage = () => {
   const handleWishlist = async () => {
     if (!session || !place) return;
     const wishlistData = {
-      placeName: place.placeName,
       title: place.title,
+      placeName: place.location,
       placeImage: place.coverImg,
       price: place.amount,
       bookingDate: new Date(),
-      image: session.user.image,
+      travelDate: new Date(),
       name: session.user.name,
       email: session.user.email,
+      image: session.user.image,
       status: "wish",
-      travelDate: new Date(),
     };
     try {
       const response = await axios.post(
@@ -73,16 +73,16 @@ const DestinationDetailsSinglePage = () => {
   const handleBook = async () => {
     if (!session || !place) return;
     const bookingData = {
-      placeName: place.placeName,
       title: place.title,
+      placeName: place.location,
       placeImage: place.coverImg,
       price: place.amount,
       bookingDate: new Date(),
-      image: session.user.image,
+      travelDate: new Date(),
       name: session.user.name,
       email: session.user.email,
+      image: session.user.image,
       status: "booked",
-      travelDate: new Date(),
     };
     try {
       const response = await axios.post(

@@ -1,30 +1,19 @@
-import { connectDB } from "@/lib/connectDB";
 import { NextResponse } from "next/server";
-import { ObjectId } from "mongodb";
+import connectDB from "@/lib/connectDB";
+import Users from "@/models/Users";
 
 //? UPDATE USER ROLE
 export const PUT = async (req, { params }) => {
-  const { id } = params;
+  const { id } = await params;
   const { role } = await req.json();
-
   try {
-    if (!role) {
-      return NextResponse.json(
-        { message: "Role is required for update" },
-        { status: 400 }
-      );
-    }
-    const db = await connectDB();
-    const usersCollection = db.collection("users");
-    const result = await usersCollection.updateOne(
-      { _id: new ObjectId(id) },
-      { $set: { role } }
-    );
-    if (result.matchedCount === 0) {
+    await connectDB();
+    const user = await Users.findByIdAndUpdate(id, { role }, { new: true });
+    if (!user) {
       return NextResponse.json({ message: "User not found" }, { status: 404 });
     }
     return NextResponse.json(
-      { message: "User role updated successfully" },
+      { message: "User role updated successfully", user },
       { status: 200 }
     );
   } catch (error) {

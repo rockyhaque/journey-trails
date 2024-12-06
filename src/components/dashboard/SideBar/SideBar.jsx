@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import {
   FaUser,
   FaPlus,
@@ -13,12 +12,21 @@ import Link from "next/link";
 import Logo from "@/components/ui/Logo";
 import { usePathname } from "next/navigation";
 import SidemenuBar from "./SidemenuBar";
+import { useSession } from "next-auth/react";
+import Spinner from "@/components/shared/Spinner/Spinner";
 
 const Sidebar = () => {
   const pathname = usePathname();
+  const { data: session, status } = useSession();
+
+  if (status === "loading" || !session) {
+    return <Spinner />;
+  }
+  const role = session?.user?.role;
+  const email = session?.user?.email;
 
   return (
-    <div className="">
+    <div>
       {/* For small and medium devices, show SidemenuBar */}
       <div className="lg:hidden p-8 z-50 ">
         <SidemenuBar />
@@ -37,42 +45,51 @@ const Sidebar = () => {
             href="/dashboard/profile"
             isActive={pathname === "/dashboard/profile"}
           />
-          <SidebarItem
-            icon={<FaPlus size={20} />}
-            label="Add Place"
-            href="/dashboard/add-place"
-            isActive={pathname === "/dashboard/add-place"}
-          />
-          <SidebarItem
-            icon={<FaListAlt size={20} />}
-            label="Destinations"
-            href="/dashboard/destinations"
-            isActive={pathname === "/dashboard/destinations"}
-          />
-          <SidebarItem
-            icon={<FaUser size={20} />}
-            label="Manage Users"
-            href="/dashboard/manage-users"
-            isActive={pathname === "/dashboard/manage-users"}
-          />
-          <SidebarItem
-            icon={<FaTicketAlt size={20} />}
-            label="All Bookings"
-            href="/dashboard/all-bookings"
-            isActive={pathname === "/dashboard/all-bookings"}
-          />
-          <SidebarItem
-            icon={<FaHeart size={20} />}
-            label="My Wishlist"
-            href="/dashboard/wishlist"
-            isActive={pathname === "/dashboard/wishlist"}
-          />
-          <SidebarItem
-            icon={<FaClipboardList size={20} />}
-            label="My Bookings"
-            href="/dashboard/my-bookings"
-            isActive={pathname === "/dashboard/my-bookings"}
-          />
+          {role === "tourist" && email && (
+            <div>
+              <SidebarItem
+                icon={<FaHeart size={20} />}
+                label="My Wishlist"
+                href="/dashboard/wishlist"
+                isActive={pathname === "/dashboard/wishlist"}
+              />
+              <SidebarItem
+                icon={<FaClipboardList size={20} />}
+                label="My Bookings"
+                href="/dashboard/my-bookings"
+                isActive={pathname === "/dashboard/my-bookings"}
+              />
+            </div>
+          )}
+
+          {role === "admin" && email && (
+            <div>
+              <SidebarItem
+                icon={<FaPlus size={20} />}
+                label="Add Place"
+                href="/dashboard/add-place"
+                isActive={pathname === "/dashboard/add-place"}
+              />
+              <SidebarItem
+                icon={<FaListAlt size={20} />}
+                label="Destinations"
+                href="/dashboard/destinations"
+                isActive={pathname === "/dashboard/destinations"}
+              />
+              <SidebarItem
+                icon={<FaUser size={20} />}
+                label="Manage Users"
+                href="/dashboard/manage-users"
+                isActive={pathname === "/dashboard/manage-users"}
+              />
+              <SidebarItem
+                icon={<FaTicketAlt size={20} />}
+                label="All Bookings"
+                href="/dashboard/all-bookings"
+                isActive={pathname === "/dashboard/all-bookings"}
+              />
+            </div>
+          )}
         </nav>
 
         <div className="p-4 border-t border-gray-700 h-screen flex flex-col justify-end">
@@ -95,7 +112,8 @@ const SidebarItem = ({ icon, label, href, isActive }) => (
       }`}
     >
       {icon}
-      <span className="hidden sm:inline">{label}</span> {/* Hide label on small screens */}
+      <span className="hidden sm:inline">{label}</span>{" "}
+      {/* Hide label on small screens */}
     </div>
   </Link>
 );
