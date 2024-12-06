@@ -2,7 +2,8 @@ import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import FacebookProvider from "next-auth/providers/facebook";
-import { connectDB } from "@/lib/connectDB";
+import connectDB from "@/lib/connectDB";
+import Users from "@/models/Users";
 
 const handler = NextAuth({
   session: {
@@ -19,12 +20,12 @@ const handler = NextAuth({
       async authorize(credentials) {
         const { email, password } = credentials;
         if (!email || !password) {
-          return null;
+          throw new Error("Email and password are required");
         }
-        const db = await connectDB();
-        const currentUser = await db.collection("users").findOne({ email });
+        await connectDB();
+        const currentUser = await Users.findOne({ email });
         if (!currentUser) {
-          return null;
+          throw new Error("User not found");
         }
         return currentUser;
       },
@@ -44,6 +45,12 @@ const handler = NextAuth({
       if (user) {
         token.role = user.role || "tourist";
         token.email = user.email;
+      } else {
+        await connectDB();
+        const currentUser = await Users.findOne({ email: token.email });
+        if (currentUser) {
+          token.role = currentUser.role;
+        }
       }
       return token;
     },
@@ -60,12 +67,15 @@ const handler = NextAuth({
       if (account.provider === "google" || account.provider === "facebook") {
         const { email } = user;
         try {
-          const db = await connectDB();
-          const userCollection = db.collection("users");
-          const userExists = await userCollection.findOne({ email });
-
+          await connectDB();
+          const userExists = await Users.findOne({ email });
           if (!userExists) {
-            await userCollection.insertOne({ ...user, role: "tourist" });
+            await Users.create({
+              email,
+              role: "tourist",
+              provider: account.provider,
+              createdAt: new Date(),
+            });
           }
           return true;
         } catch (err) {

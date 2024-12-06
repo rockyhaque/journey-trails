@@ -1,36 +1,60 @@
-import { connectDB } from "@/lib/connectDB";
-import { NextResponse } from "next/server";
+import connectDB from "@/lib/connectDB";
+import AllPlaces from "@/models/AllPlaces";
 
 //? GET ALL PLACES
-export const GET = async () => {
+export async function GET(req) {
   try {
-    const db = await connectDB();
-    const placesCollection = db.collection("all-places");
-
-    const places = await placesCollection.find().toArray();
-    return NextResponse.json({ places });
+    await connectDB();
+    const places = await AllPlaces.find();
+    return new Response(JSON.stringify({ success: true, places: places }), {
+      status: 200,
+    });
   } catch (error) {
     console.error("Error in GET /api/all-places:", error);
-    return NextResponse.json(
-      { message: "Internal Server Error" },
+    return new Response(
+      JSON.stringify({ success: false, message: "Server error", error }),
       { status: 500 }
     );
   }
-};
+}
 
 // ? POST NEW PLACES
-export const POST = async (req) => {
+export async function POST(req, res) {
   try {
-    const place = await req.json();
-    const db = await connectDB();
-    const placesCollection = db.collection("all-places");
-    const result = await placesCollection.insertOne(place);
-    return NextResponse.json({ result }, { status: 201 });
+    await connectDB();
+    const body = await req.json();
+    const newPlace = new AllPlaces(body);
+    const savedPlace = await newPlace.save();
+    return new Response(JSON.stringify(savedPlace), {
+      status: 201,
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
     console.error("Error in POST /api/all-places:", error);
-    return NextResponse.json(
-      { message: "Internal Server Error" },
-      { status: 500 }
+    if (error.name === "ValidationError") {
+      const validationErrors = {};
+      for (const field in error.errors) {
+        validationErrors[field] = error.errors[field].message;
+      }
+      return new Response(
+        JSON.stringify({
+          message: "Validation error",
+          validationErrors: validationErrors,
+        }),
+        {
+          status: 400,
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+    }
+    return new Response(
+      JSON.stringify({
+        message: "An error occurred while creating the place.",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
-};
+}

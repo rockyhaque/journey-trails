@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState, useEffect } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { SlMenu } from "react-icons/sl";
@@ -14,13 +14,22 @@ import {
   FaClipboardList,
 } from "react-icons/fa";
 import { usePathname } from "next/navigation";
+import Spinner from "@/components/shared/Spinner/Spinner";
+import { useSession } from "next-auth/react";
 
 const SidemenuBar = () => {
-    const pathname = usePathname();
+  const pathname = usePathname();
   const [click, setClick] = useState(false);
+  const { data: session, status } = useSession();
 
   const handleClick = () => setClick(!click);
   const closeMenu = () => setClick(false);
+
+  if (status === "loading" || !session) {
+    return <Spinner />;
+  }
+  const role = session?.user?.role;
+  const email = session?.user?.email;
 
   useEffect(() => {
     document.body.style.overflow = click ? "hidden" : "auto";
@@ -64,7 +73,9 @@ const SidemenuBar = () => {
             <div className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-900 text-lg font-bold">
               Journey Trails
             </div>
-            <div className="text-xs font-bold -mt-1">Let Your Journey With Us!</div>
+            <div className="text-xs font-bold -mt-1">
+              Let Your Journey With Us!
+            </div>
           </div>
         </div>
 
@@ -73,50 +84,59 @@ const SidemenuBar = () => {
           <div className="flex justify-start font-bold px-2">
             <h3>Main Links</h3>
           </div>
-          <nav className="flex-1 mt-4 space-y-2">
-          <SidebarItem
-            icon={<FaUser size={20} />}
-            label="Profile"
-            href="/dashboard/profile"
-            isActive={pathname === "/dashboard/profile"}
-          />
-          <SidebarItem
-            icon={<FaPlus size={20} />}
-            label="Add Place"
-            href="/dashboard/add-place"
-            isActive={pathname === "/dashboard/add-place"}
-          />
-          <SidebarItem
-            icon={<FaListAlt size={20} />}
-            label="Destinations"
-            href="/dashboard/destinations"
-            isActive={pathname === "/dashboard/destinations"}
-          />
-          <SidebarItem
-            icon={<FaUser size={20} />}
-            label="Manage Users"
-            href="/dashboard/manage-users"
-            isActive={pathname === "/dashboard/manage-users"}
-          />
-          <SidebarItem
-            icon={<FaTicketAlt size={20} />}
-            label="All Bookings"
-            href="/dashboard/all-bookings"
-            isActive={pathname === "/dashboard/all-bookings"}
-          />
-          <SidebarItem
-            icon={<FaHeart size={20} />}
-            label="My Wishlist"
-            href="/dashboard/wishlist"
-            isActive={pathname === "/dashboard/wishlist"}
-          />
-          <SidebarItem
-            icon={<FaClipboardList size={20} />}
-            label="My Bookings"
-            href="/dashboard/my-bookings"
-            isActive={pathname === "/dashboard/my-bookings"}
-          />
-        </nav>
+          <nav className="flex-1 mt-4 space-y-2 ">
+            <SidebarItem
+              icon={<FaUser size={20} />}
+              label="Profile"
+              href="/dashboard/profile"
+              isActive={pathname === "/dashboard/profile"}
+            />
+            {role === "tourist" && email && (
+              <div>
+                <SidebarItem
+                  icon={<FaHeart size={20} />}
+                  label="My Wishlist"
+                  href="/dashboard/wishlist"
+                  isActive={pathname === "/dashboard/wishlist"}
+                />
+                <SidebarItem
+                  icon={<FaClipboardList size={20} />}
+                  label="My Bookings"
+                  href="/dashboard/my-bookings"
+                  isActive={pathname === "/dashboard/my-bookings"}
+                />
+              </div>
+            )}
+
+            {role === "admin" && email && (
+              <div>
+                <SidebarItem
+                  icon={<FaPlus size={20} />}
+                  label="Add Place"
+                  href="/dashboard/add-place"
+                  isActive={pathname === "/dashboard/add-place"}
+                />
+                <SidebarItem
+                  icon={<FaListAlt size={20} />}
+                  label="Destinations"
+                  href="/dashboard/destinations"
+                  isActive={pathname === "/dashboard/destinations"}
+                />
+                <SidebarItem
+                  icon={<FaUser size={20} />}
+                  label="Manage Users"
+                  href="/dashboard/manage-users"
+                  isActive={pathname === "/dashboard/manage-users"}
+                />
+                <SidebarItem
+                  icon={<FaTicketAlt size={20} />}
+                  label="All Bookings"
+                  href="/dashboard/all-bookings"
+                  isActive={pathname === "/dashboard/all-bookings"}
+                />
+              </div>
+            )}
+          </nav>
         </ul>
       </div>
 

@@ -1,6 +1,5 @@
 "use client";
 
-import SectionHeading from "@/components/shared/SectionHeading/SectionHeading";
 import Spinner from "@/components/shared/Spinner/Spinner";
 import axios from "axios";
 import { useSession } from "next-auth/react";
@@ -24,21 +23,19 @@ const AllBookingsPage = () => {
   };
 
   useEffect(() => {
-    if (userEmail) {
-      const fetchBookings = async () => {
-        try {
-          const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_URL}/api/all-bookings/${userEmail}`
-          );
-          setbookings(response.data || []);
-          setLoading(false);
-        } catch (err) {
-          setError(err.message);
-          setLoading(false);
-        }
-      };
-      fetchBookings();
-    }
+    const fetchBookings = async () => {
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_URL}/api/all-bookings`
+        );
+        setbookings(response.data.bookings || []);
+        setLoading(false);
+      } catch (err) {
+        setError(err.message);
+        setLoading(false);
+      }
+    };
+    fetchBookings();
   }, [userEmail]);
   const handleDelete = async (bookingId) => {
     try {
@@ -55,6 +52,9 @@ const AllBookingsPage = () => {
       if (result.isConfirmed) {
         const response = await axios.delete(`/api/all-bookings/${bookingId}`);
         if (response.status === 200) {
+          setbookings((prevBookings) =>
+            prevBookings.filter((booking) => booking._id !== bookingId)
+          );
           Swal.fire("Deleted!", "Your booking has been deleted.", "success");
         } else {
           Swal.fire(

@@ -1,34 +1,38 @@
-import { connectDB } from "@/lib/connectDB";
+import connectDB from "@/lib/connectDB";
+import Users from "@/models/Users";
 import { NextResponse } from "next/server";
 
 // ? NEW CREATED USERS
-export const POST = async (request) => {
-  const newUser = await request.json();
+export const POST = async (req) => {
   try {
-    const db = await connectDB();
-    const userCollection = db.collection("users");
-    const exixst = await userCollection.findOne({ email: newUser.email });
+    await connectDB();
+    const body = await req.json();
+    const exixst = await Users.findOne({ email: body.email });
     if (exixst) {
       return NextResponse.json(
         { message: "User Alredy Exixst" },
         { status: 409 }
       );
     }
-    await userCollection.insertOne({ ...newUser });
-    return NextResponse.json({ message: "User Created" }, { status: 200 });
+    const newUser = new Users(body);
+    const users = await newUser.save();
+    return NextResponse.json(
+      { message: "User Created", users },
+      { status: 200 }
+    );
   } catch (err) {
     return NextResponse.json(
-      { message: "Something went wrong", err },
+      { message: "Something went wrong", error: err.message },
       { status: 500 }
     );
   }
 };
+
 // ? GET ALL USERS
 export const GET = async () => {
   try {
-    const db = await connectDB();
-    const userCollection = db.collection("users");
-    const users = await userCollection.find({}).toArray();
+    await connectDB();
+    const users = await Users.find({});
     return NextResponse.json({ users }, { status: 200 });
   } catch (err) {
     console.error("Error fetching users:", err);

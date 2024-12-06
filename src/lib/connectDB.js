@@ -1,23 +1,15 @@
-import { MongoClient, ServerApiVersion } from "mongodb";
+import mongoose from "mongoose";
 
-let db;
-export const connectDB = async () => {
-  if (db) return db;
+const connectDB = async () => {
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection.asPromise();
+  }
   try {
-    const uri = process.env.NEXT_MONGODB_URI;
-    const client = new MongoClient(uri, {
-      serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-      },
-    });
-    await client.connect();
-    db = client.db("journey-trails");
-    console.log("Connected to database:", db.databaseName);
-    return db;
+    await mongoose.connect(process.env.NEXT_MONGODB_URI);
+    console.log("Connected to Journey-Trails Database");
   } catch (error) {
-    console.error("Database connection error:", error);
-    throw new Error("Database connection failed");
+    console.error("Failed to connect to MongoDB", error);
+    throw new Error("Failed to connect to MongoDB");
   }
 };
+export default connectDB;
