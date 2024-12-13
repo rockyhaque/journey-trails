@@ -11,11 +11,15 @@ import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { GoChevronRight } from "react-icons/go";
+import UpdateDestinations from "./updateDestinations/page";
 const DestinationsPage = () => {
   const [destinations, setDestinations] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const router = useRouter();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDestination, setSelectedDestination] = useState(null);
+ 
 
   useEffect(() => {
     const fetchDestinations = async () => {
@@ -75,6 +79,11 @@ const DestinationsPage = () => {
 
   if (loading) return <Spinner />;
   if (error) return <p>Error: {error}</p>;
+  
+  const handleUpdateClick = (destination) => {
+    setSelectedDestination(destination);
+    setIsModalOpen(true);
+  };
 
   return (
     <div>
@@ -164,8 +173,8 @@ const DestinationsPage = () => {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                   <button
-                    data-tip="Update"
-                    className="text-green-600 hover:text-red-800 font-bold tooltip tooltip-success"
+                    onClick={() => handleUpdateClick(destination)}
+                    className="text-green-600 hover:text-red-800 font-bold"
                   >
                     <MdEditLocationAlt className="text-2xl" />
                   </button>
@@ -183,6 +192,22 @@ const DestinationsPage = () => {
             ))}
           </tbody>
         </table>
+        {isModalOpen && (
+        <div className="fixed  inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="text-red-600 font-bold text-lg p-5 float-right"
+            >
+              ✖
+            </button>
+            <UpdateDestinations
+              destination={selectedDestination}
+              onClose={() => setIsModalOpen(false)}
+            />
+          </div>
+        </div>
+      )}
       </div>
     </div>
   );
