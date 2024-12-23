@@ -78,7 +78,7 @@ const FeaturedPlace = () => {
           </button>
           <button
             className="max-sm:mt-52 max-sm:right-[10px] xl:top-1/2 xl:-right-5 md:top-1/2 md:-right-[2px] "
-            id="next-button"
+            id="prev-button"
             style={{
               position: "absolute",
               transform: "translateY(-50%)",
@@ -104,7 +104,7 @@ const FeaturedPlace = () => {
             slidesPerView={1}
             navigation={{
               prevEl: "#prev-button", // Custom previous button
-              nextEl: "#next-button", // Custom next button
+              nextEl: "#prev-button ", // Custom next button
             }}
             loop={places.length > 1}
             breakpoints={{
