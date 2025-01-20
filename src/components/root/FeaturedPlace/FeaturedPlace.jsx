@@ -104,7 +104,7 @@ const FeaturedPlace = () => {
             slidesPerView={1}
             navigation={{
               prevEl: "#prev-button", // Custom previous button
-              nextEl: "#prev-button ", // Custom next button
+              nextEl: "#prev-button ", // Custom next buttogit 
             }}
             loop={places.length > 1}
             breakpoints={{

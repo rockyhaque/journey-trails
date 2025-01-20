@@ -6,7 +6,8 @@ import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import { FaGoogle, FaFacebook } from "react-icons/fa";
 import Spinner from "@/components/shared/Spinner/Spinner";
-
+import loginsign from "../../../../public/assets/images/footer-icons/loginsign.jpg";
+import Image from "next/image";
 const Page = () => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -69,91 +70,95 @@ const Page = () => {
     }
   };
   return (
-    <div className="w-[30%] mx-auto my-10">
-      <div className="p-4 rounded-md shadow bg-slate-300  h-full">
-        <p className="text-sm text-center dark:text-gray-600">
-          Dont have account?
-          <Link
-            href={"signup"}
-            className="hover:underline text-linL dark:text-linD"
-          >
-            Sign up here
-          </Link>
-        </p>
-        <div className="my-6 space-y-4">
-          <button
-            aria-label="Login with Facebook"
-            onClick={() => signIn("facebook")}
-            type="button"
-            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1"
-          >
-            <FaFacebook className="text-2xl text-blue-800" />
-            <p>Login with Facebook</p>
-          </button>
-          <button
-            aria-label="Login with Google"
-            onClick={() => handleSocialLogin("google")}
-            type="button"
-            className="flex items-center justify-center w-full p-4 space-x-4 border rounded-md focus:ring-2 focus:ring-offset-1"
-          >
-            <FaGoogle className="text-2xl text-[#E34032]" />
-            <p>Login with Google</p>
-          </button>
+    <div className="flex items-center justify-center min-h-screen bg-gradient-to-br from-indigo-50 via-cyan-100 to-cyan-500 px-4">
+      <div className="relative flex flex-col md:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
+        <div className="hidden md:flex w-1/2 relative">
+          <Image
+            src={loginsign}
+            alt="Login Illustration"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-l-lg"
+          />
         </div>
-        <div className="flex items-center w-full my-4">
-          <hr className="w-full dark:text-gray-600" />
-          <p className="px-3 dark:text-gray-600">OR</p>
-          <hr className="w-full dark:text-gray-600" />
-        </div>
-        <form onSubmit={handleLogin} className="space-y-8">
-          <div className="space-y-4">
-            <div className="space-y-2">
-              <label
-                htmlFor="email"
-                className="block text-sm text-headL dark:text-headD"
-              >
-                Email address
+
+        {/* Right Section - Form */}
+        <div className="w-full md:w-1/2 p-8 flex flex-col justify-center">
+          <h2 className="text-3xl font-bold text-center text-gray-800">
+            Welcome Back
+          </h2>
+          <p className="text-center text-gray-500 mb-4">Login to continue</p>
+          <div className="space-y-3">
+            <button
+              onClick={() => handleSocialLogin("google")}
+              className="flex items-center justify-center w-full px-4 py-3 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 transition"
+            >
+              <FaGoogle className="text-xl text-red-500 mr-2" /> Login with
+              Google
+            </button>
+            <button
+              onClick={() => handleSocialLogin("facebook")}
+              className="flex items-center justify-center w-full px-4 py-3 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800  transition"
+            >
+              <FaFacebook className="text-xl mr-2" /> Login with Facebook
+            </button>
+          </div>
+          <div className="flex items-center my-4">
+            <hr className="w-full border-gray-300" />
+            <span className="text-gray-500 px-2">OR</span>
+            <hr className="w-full border-gray-300" />
+          </div>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-600">
+                Email Address
               </label>
               <input
                 type="email"
                 name="email"
-                id="email"
-                placeholder="*******@email.com"
-                className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+                required
+                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200 focus:outline-none"
+                placeholder="Enter your email"
               />
             </div>
-            <div className="space-y-2">
-              <label
-                htmlFor="password"
-                className="text-sm ext-headL dark:text-headD"
-              >
+
+            <div>
+              <label className="block text-sm font-medium text-gray-600">
                 Password
               </label>
               <input
                 type="password"
                 name="password"
-                id="password"
-                placeholder="*******"
-                className="w-full px-3 py-2 border rounded-md dark:border-gray-300 dark:bg-gray-50 dark:text-gray-800 focus:dark:border-violet-600"
+                required
+                className="w-full px-4 py-2 mt-1 border border-gray-300 rounded-lg focus:ring focus:ring-indigo-200 focus:outline-none"
+                placeholder="Enter your password"
               />
-              <a
-                rel="noopener noreferrer"
+              <Link
                 href="#"
-                className="text-xs hover:underline dark:text-gray-600"
+                className="text-xs text-indigo-600 hover:underline"
               >
                 Forgot password?
-              </a>
+              </Link>
             </div>
-          </div>
-          <button
-            className="btn w-full px-8 py-3 font-semibold rounded-md"
-            disabled={loading}
-          >
-            Sign In
-          </button>
-        </form>
+
+            <button
+              type="submit"
+              className="w-full px-4 py-2 text-white bg-gradient-to-r from-cyan-500 to-blue-500 hover:bg-gradient-to-bl focus:ring-4 focus:outline-none focus:ring-cyan-300 dark:focus:ring-cyan-800 font-medium rounded-lg text-center "
+              disabled={loading}
+            >
+              {loading ? <Spinner /> : "Sign In"}
+            </button>
+          </form>
+
+          {/* Signup Link */}
+          <p className="text-sm text-center text-gray-600 mt-4">
+            Don’t have an account?{" "}
+            <Link href="/signup" className="text-indigo-600 hover:underline">
+              Sign up here
+            </Link>
+          </p>
+        </div>
       </div>
-      {loading && <Spinner />}
     </div>
   );
 };
