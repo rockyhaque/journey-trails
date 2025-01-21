@@ -42,3 +42,33 @@ export const GET = async () => {
     );
   }
 };
+// ? DELETE USER
+export const DELETE = async (req) => {
+  try {
+    await connectDB();
+    const { searchParams } = new URL(req.url);
+    const userId = searchParams.get("id");
+    if (!userId) {
+      return NextResponse.json(
+        { message: "User ID is required" },
+        { status: 400 }
+      );
+    }
+    const deletedUser = await Users.findByIdAndDelete(userId);
+    if (!deletedUser) {
+      return NextResponse.json(
+        { message: "User not found" },
+        { status: 404 }
+      );
+    }
+    return NextResponse.json(
+      { message: "User deleted successfully" },
+      { status: 200 }
+    );
+  } catch (err) {
+    return NextResponse.json(
+      { message: "Something went wrong", error: err.message },
+      { status: 500 }
+    );
+  }
+};
