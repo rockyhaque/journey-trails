@@ -49,6 +49,30 @@ const ManageUserPage = () => {
       });
     }
   };
+  const handleDelete = async (userId) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_URL}/api/users?id=${userId}`
+      );
+      if (response.status === 200) {
+        Swal.fire({
+          title: "Deleted!",
+          text: "User has been removed successfully!",
+          icon: "success",
+          confirmButtonText: "OK",
+        });
+        setUsers(users.filter((user) => user._id !== userId));
+      }
+    } catch (err) {
+      console.error("Error deleting user:", err);
+      Swal.fire({
+        title: "Error!",
+        text: "Failed to delete user. Please try again later.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    }
+  };
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -83,7 +107,7 @@ const ManageUserPage = () => {
       </div>
       <div className="max-w-screen-xl mx-auto overflow-x-auto my-5">
         <table className="min-w-full divide-y divide-gray-200 rounded-lg shadow-lg">
-          <thead className="bg-gradient-to-r from-cyan-600 to-purple-500 text-white">
+          <thead className="bg-gradient-to-r from-cyan-600 to-purple-500 text-white w-full">
             <tr>
               <th
                 scope="col"
@@ -108,6 +132,12 @@ const ManageUserPage = () => {
                 className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
               >
                 Email
+              </th>
+              <th
+                scope="col"
+                className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider"
+              >
+                Update
               </th>
               <th
                 scope="col"
@@ -147,7 +177,7 @@ const ManageUserPage = () => {
                       setSelectedUser(user);
                       setIsOpen(true);
                     }}
-                    className="text-red-600 hover:text-red-800 font-bold"
+                    className="text-blue-600 hover:text-blue-800 font-bold"
                   >
                     Update Role
                     <UpdateUserModal
@@ -155,6 +185,14 @@ const ManageUserPage = () => {
                       isOpen={isOpen}
                       modalHandler={modalHandler}
                     />
+                  </button>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                  <button
+                    onClick={() => handleDelete(user._id)}
+                    className="text-red-600 hover:text-red-800 font-bold"
+                  >
+                    Remove
                   </button>
                 </td>
               </tr>
