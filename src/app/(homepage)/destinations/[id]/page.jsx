@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import axios from "axios";
 import Image from "next/image";
@@ -18,7 +18,7 @@ const DestinationDetailsSinglePage = () => {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const loadPlaceDetails = async () => {
+  const loadPlaceDetails = useCallback(async () => {
     try {
       const { data } = await axios.get(
         `${process.env.NEXT_PUBLIC_URL}/api/all-places/${id}`
@@ -29,10 +29,11 @@ const DestinationDetailsSinglePage = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id]); 
+  
   useEffect(() => {
     if (id) loadPlaceDetails();
-  }, [id]);
+  }, [id, loadPlaceDetails]);
 
   const handleWishlist = async () => {
     if (!session || !place) return;

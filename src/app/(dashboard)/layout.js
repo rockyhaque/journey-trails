@@ -8,10 +8,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <div className="flex min-h-screen">
-      <div className="w-1/6">
+      <div className="xl:w-1/5 lg:w-1/4">
         <Sidebar />
       </div>
-      <div className="w-5/6 min-h-screen overflow-auto">{children}</div>
+      <div className="w-full lg:px-2 min-h-screen overflow-auto">{children}</div>
     </div>
   );
 }

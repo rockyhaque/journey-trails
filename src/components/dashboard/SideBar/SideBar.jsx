@@ -28,7 +28,7 @@ const Sidebar = () => {
   return (
     <div>
       {/* For small and medium devices, show SidemenuBar */}
-      <div className="lg:hidden p-8 z-50 ">
+      <div className="lg:hidden fixed z-50  ">
         <SidemenuBar />
       </div>
 
