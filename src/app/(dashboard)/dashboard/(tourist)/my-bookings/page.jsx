@@ -25,7 +25,6 @@ const MyBookingsPage = () => {
             `${process.env.NEXT_PUBLIC_URL}/api/all-bookings/${userEmail}`
           );
           setbookings(response.data || []);
-          console.log(response);
           setLoading(false);
         } catch (err) {
           setError(err.message);

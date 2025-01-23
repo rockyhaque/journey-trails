@@ -39,10 +39,10 @@ const Page = () => {
 
     emailjs
       .sendForm(
-        process.env.NEXT_EMAIL_SERVICE_ID, // Your service ID
-        process.env.NEXT_EMAIL_TEMPLATE_ID, // Your template ID
-        form.current, // The form reference
-        process.env.NEXT_EMAIL_KEY // Your public key       // Your public key
+        "service_g5wjtfm", // replace with actual value
+        "template_b6f4qtn", // replace with actual value
+        form.current,
+        "SqJwcMG19bUcQA6DY" // replace with actual value
       )
       .then(
         () => {

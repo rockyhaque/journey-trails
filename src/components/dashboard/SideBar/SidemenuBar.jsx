@@ -22,33 +22,41 @@ const SidemenuBar = () => {
   const [click, setClick] = useState(false);
   const { data: session, status } = useSession();
 
-  const handleClick = () => setClick(!click);
-  const closeMenu = () => setClick(false);
-
-  if (status === "loading" || !session) {
-    return <Spinner />;
-  }
-  const role = session?.user?.role;
-  const email = session?.user?.email;
-
+  // Ensure useEffect is always called and not conditionally skipped
   useEffect(() => {
     document.body.style.overflow = click ? "hidden" : "auto";
   }, [click]);
 
+  // Show loading spinner while session is being fetched
+  if (status === "loading") {
+    return <Spinner />;
+  }
+
+  // If no session, return null or redirect the user
+  if (!session) {
+    return <p>Please sign in.</p>; // You can also redirect to a login page
+  }
+
+  const role = session?.user?.role;
+  const email = session?.user?.email;
+
+  const handleClick = () => setClick(!click);
+  const closeMenu = () => setClick(false);
+
   return (
     <div>
-      <div className="lg:hidden">
+      <div className="lg:hidden absolute md:p-10 max-sm:p-6">
         {/* Burger Icon */}
         <div onClick={handleClick}>
           {click ? (
             <AiOutlineClose
-              size={20}
-              className="text-xl text-blue-500 lg:text-2xl cursor-pointer"
+              size={30}
+              className="text-4xl text-cyan-500 cursor-pointer"
             />
           ) : (
             <SlMenu
-              size={20}
-              className="text-xl lg:text-2xl text-blue-500 font-bold cursor-pointer"
+              size={30}
+              className="text-4xl  text-cyan-500 font-bold cursor-pointer"
             />
           )}
         </div>
@@ -64,13 +72,13 @@ const SidemenuBar = () => {
         <div className="sticky top-0 bg-base-200 px-4 py-3 border-b border-gray-700">
           <button
             onClick={closeMenu}
-            className="absolute top-4 right-4 hover:text-blue-500 cursor-pointer border-2 border-blue-400 p-1 rounded-full"
+            className="absolute top-4 right-4 hover:text-cyan-500 cursor-pointer border-2 border-cyan-400 p-1 rounded-full"
           >
             <AiOutlineClose className="text-xl lg:text-2xl cursor-pointer" />
           </button>
           <div className="flex flex-col items-center">
             <Image src={logo} alt="logo" width={80} height={100} />
-            <div className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 via-indigo-500 to-blue-900 text-lg font-bold">
+            <div className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-500 via-indigo-500 to-cyan-900 text-lg font-bold">
               Journey Trails
             </div>
             <div className="text-xs font-bold -mt-1">
@@ -151,13 +159,14 @@ const SidemenuBar = () => {
   );
 };
 
+// Sidebar Item Component
 const SidebarItem = ({ icon, label, href, isActive }) => (
   <Link href={href} passHref>
     <div
       className={`flex items-center p-3 space-x-3 cursor-pointer ${
         isActive
-          ? "bg-blue-600 text-white font-bold border-l-4 border-blue-400"
-          : "hover:bg-blue-400"
+          ? "bg-cyan-600 text-white font-bold border-l-4 border-cyan-400"
+          : "hover:bg-cyan-400"
       }`}
     >
       {icon}
